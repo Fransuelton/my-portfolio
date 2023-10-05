@@ -4,22 +4,28 @@ import {
   faGithub,
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
-import styled from "styled-components";
+import { styled, keyframes } from "styled-components";
 
 const About = () => {
   return (
-    <Section id="about" data-aos="fade-in" data-aos-easing="ease-in-out" data-aos-mirror="true">
+    <Section
+      id="about"
+      data-aos="fade-in"
+      data-aos-easing="ease-in-out"
+      data-aos-mirror="true"
+    >
       <Title>Sobre mim</Title>
 
       <AboutContainer>
+        <StyledImg src="/art.png" alt="" />
         <StyledDiv>
           <Description>
-            Sou um desenvolvedor frontend com quase um ano de experiência,
+            Sou um desenvolvedor frontend focado e determinado, atualmente
             cursando técnico em redes de computadores pelo IMD/UFRN. Tenho
-            expertise em HTML, CSS, JavaScript e React, além de estar sempre
-            buscando aprimorar minhas habilidades. Meu objetivo é me tornar um
-            desenvolvedor fullstack. Estou pronto para contribuir em projetos
-            desafiadores.
+            expertise em HTML, CSS, JavaScript, React dentre outras bibliotecas
+            e frameworks, além de estar sempre buscando aprimorar minhas
+            habilidades. Meu objetivo é me tornar um desenvolvedor fullstack.
+            Estou pronto para contribuir em projetos desafiadores.
           </Description>
 
           <SocialIconsList>
@@ -44,6 +50,27 @@ const About = () => {
     </Section>
   );
 };
+
+const FloatAnimation = keyframes`
+  0%{
+    transform: translate(0px);
+  }
+  50%{
+    transform: translateY(-20px)
+  }
+  100%{
+    transform: translateY(0px)
+  }
+`;
+
+const StyledImg = styled.img`
+  animation: ${FloatAnimation} 5s ease infinite;
+
+  @media (max-width: 480px) {
+    width: 35rem;
+    height: 35rem;
+  }
+`;
 
 const Section = styled.section`
   display: flex;

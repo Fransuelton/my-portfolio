@@ -6,7 +6,7 @@ const Header = () => {
     <StyledHeader>
       <HeaderContainer>
         <a href="#">
-          <Logo>FF</Logo>
+          <Img src="/logo.svg" alt="" />
         </a>
 
         <StyledNav>
@@ -55,18 +55,13 @@ const HeaderContainer = styled.div`
   align-items: center;
 `;
 
-const Logo = styled.h1`
-  font-size: 3rem;
-  font-weight: 700;
+const Img = styled.img`
   width: 6.5rem;
   height: 6.5rem;
-  line-height: 5.5rem;
-  text-align: center;
-  text-decoration: underline;
   transition: 0.3s;
 
   &:hover {
-    color: var(--tertiary-color);
+    opacity: 0.8;
   }
 `;
 

@@ -10,7 +10,7 @@ const Main = () => {
           <Title>Fransuelton Francisco</Title>
           <VacantTitle>Desenvolvedor Front-end</VacantTitle>
 
-          <Button label="Currículo" />
+          <Button label="Download CV" />
         </InfoContainer>
 
         <Img

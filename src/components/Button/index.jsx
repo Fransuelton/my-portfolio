@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFile } from "@fortawesome/free-solid-svg-icons";
+import { faFileArrowDown } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const Button = ({ label }) => {
   return (
     <StyledButton>
-      <StyledIcon icon={faFile} />
+      <StyledIcon icon={faFileArrowDown} />
       {label}
     </StyledButton>
   );
@@ -20,7 +20,7 @@ const StyledButton = styled.button`
   margin-top: 2rem;
   border-radius: 8px;
   background-color: var(--secondary-color);
-  font-size: var(--small-font-size);
+  font-size: 1.5rem;
   color: var(--quaternary-color);
   font-weight: 700;
   transition: 0.5s ease-in-out;
