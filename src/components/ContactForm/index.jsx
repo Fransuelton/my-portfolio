@@ -98,6 +98,10 @@ const SucessMessage = styled.p`
   color: var(--quaternary-color);
   text-align: center;
   width: 45rem;
+
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
+  }
 `
 
 export { ContactForm };
