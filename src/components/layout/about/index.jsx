@@ -111,6 +111,7 @@ const StyledDiv = styled.div`
   width: 50rem;
   @media (max-width: 480px) {
     align-items: center;
+    width: 35rem;
   }
 `;
 
