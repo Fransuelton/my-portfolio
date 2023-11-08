@@ -1,6 +1,11 @@
 import { styled, keyframes } from "styled-components";
-import { Button } from "../../Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../../styles/variables.css";
+import {
+  faLinkedin,
+  faGithub,
+  faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Main = () => {
   return (
@@ -10,7 +15,23 @@ const Main = () => {
           <Title>Fransuelton Francisco</Title>
           <VacantTitle>Desenvolvedor Front-end</VacantTitle>
 
-          <Button label="Download CV" />
+          <SocialIconsList>
+            <li>
+              <a href="https://www.linkedin.com/in/fransuelton/">
+                <StyledIcon icon={faLinkedin} inverse />
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/Fransuelton">
+                <StyledGithubIcon icon={faGithub} inverse />
+              </a>
+            </li>
+            <li>
+              <a href="https://api.whatsapp.com/send?phone=558499778995">
+                <StyledWhatsappIcon icon={faWhatsapp} inverse />
+              </a>
+            </li>
+          </SocialIconsList>
         </InfoContainer>
 
         <Img
@@ -125,6 +146,74 @@ const Img = styled.img`
   @media (max-width: 500px) {
     width: 33rem;
     height: 33rem;
+  }
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1px solid var(--quaternary-color);
+  padding: 1rem;
+  border-radius: 50%;
+
+  transition: 0.5s;
+
+  &:hover {
+    background-color: rgb(4%, 40%, 76%);
+
+    border-color: rgb(4%, 40%, 76%);
+    border-radius: 20%;
+
+    box-shadow: 0 0 25px rgb(4%, 40%, 76%);
+
+    box-shadow: 0 0 5px rgb(4%, 40%, 76%), 0 0 25px rgb(4%, 40%, 76%),
+      0 0 50px rgb(4%, 40%, 76%), 0 0 100px rgb(4%, 40%, 76%);
+  }
+`;
+
+const StyledWhatsappIcon = styled(FontAwesomeIcon)`
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1px solid var(--quaternary-color);
+  padding: 1rem;
+
+  border-radius: 50%;
+
+  transition: 0.5s;
+
+  &:hover {
+    background-color: rgb(0%, 90%, 46%);
+
+    border-color: rgb(0%, 90%, 46%);
+    border-radius: 20%;
+
+    box-shadow: 0 0 25px rgb(0%, 90%, 46%);
+
+    box-shadow: 0 0 5px rgb(0%, 90%, 46%), 0 0 25px rgb(0%, 90%, 46%),
+      0 0 50px rgb(0%, 90%, 46%), 0 0 100px rgb(0%, 90%, 46%);
+  }
+`;
+
+const StyledGithubIcon = styled(FontAwesomeIcon)`
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1px solid var(--quaternary-color);
+  padding: 1rem;
+  border-radius: 50%;
+
+  transition: 0.5s;
+
+  &:hover {
+    border-radius: 20%;
+  }
+`;
+
+const SocialIconsList = styled.ul`
+  display: flex;
+  gap: 2rem;
+
+  @media (max-width: 480px) {
+    justify-content: center;
   }
 `;
 

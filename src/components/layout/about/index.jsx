@@ -1,9 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLinkedin,
-  faGithub,
-  faWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
+import { Button } from "../../Button";
 import { styled, keyframes } from "styled-components";
 
 const About = () => {
@@ -28,23 +23,7 @@ const About = () => {
             Estou pronto para contribuir em projetos desafiadores.
           </Description>
 
-          <SocialIconsList>
-            <li>
-              <a href="https://www.linkedin.com/in/fransuelton/">
-                <StyledIcon icon={faLinkedin} inverse />
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/Fransuelton">
-                <StyledGithubIcon icon={faGithub} inverse />
-              </a>
-            </li>
-            <li>
-              <a href="https://api.whatsapp.com/send?phone=558499778995">
-                <StyledWhatsappIcon icon={faWhatsapp} inverse />
-              </a>
-            </li>
-          </SocialIconsList>
+          <Button label="Download CV" />
         </StyledDiv>
       </AboutContainer>
     </Section>
@@ -119,79 +98,11 @@ const Description = styled.p`
   font-size: var(--small-font-size);
   color: var(--quaternary-color);
   font-weight: 400;
-  height: 30rem;
+  margin-bottom: 3rem;
 
   @media (max-width: 480px) {
     font-size: 1.6rem;
     width: 35rem;
-  }
-`;
-
-const SocialIconsList = styled.ul`
-  display: flex;
-  gap: 2rem;
-
-  @media (max-width: 480px) {
-    justify-content: center;
-  }
-`;
-
-const StyledIcon = styled(FontAwesomeIcon)`
-  width: 3.5rem;
-  height: 3.5rem;
-  border: 1px solid var(--quaternary-color);
-  padding: 1rem;
-  border-radius: 50%;
-
-  transition: 0.5s;
-
-  &:hover {
-    background-color: rgb(4%, 40%, 76%);
-
-    border-color: rgb(4%, 40%, 76%);
-    border-radius: 20%;
-
-    box-shadow: 0 0 25px rgb(4%, 40%, 76%);
-
-    box-shadow: 0 0 5px rgb(4%, 40%, 76%), 0 0 25px rgb(4%, 40%, 76%),
-      0 0 50px rgb(4%, 40%, 76%), 0 0 100px rgb(4%, 40%, 76%);
-  }
-`;
-
-const StyledWhatsappIcon = styled(FontAwesomeIcon)`
-  width: 3.5rem;
-  height: 3.5rem;
-  border: 1px solid var(--quaternary-color);
-  padding: 1rem;
-
-  border-radius: 50%;
-
-  transition: 0.5s;
-
-  &:hover {
-    background-color: rgb(0%, 90%, 46%);
-
-    border-color: rgb(0%, 90%, 46%);
-    border-radius: 20%;
-
-    box-shadow: 0 0 25px rgb(0%, 90%, 46%);
-
-    box-shadow: 0 0 5px rgb(0%, 90%, 46%), 0 0 25px rgb(0%, 90%, 46%),
-      0 0 50px rgb(0%, 90%, 46%), 0 0 100px rgb(0%, 90%, 46%);
-  }
-`;
-
-const StyledGithubIcon = styled(FontAwesomeIcon)`
-  width: 3.5rem;
-  height: 3.5rem;
-  border: 1px solid var(--quaternary-color);
-  padding: 1rem;
-  border-radius: 50%;
-
-  transition: 0.5s;
-
-  &:hover {
-    border-radius: 20%;
   }
 `;
 
