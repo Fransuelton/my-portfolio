@@ -15,12 +15,13 @@ const About = () => {
         <StyledImg src="/art.png" alt="" />
         <StyledDiv>
           <Description>
-            Sou um desenvolvedor frontend focado e determinado, atualmente
-            cursando técnico em redes de computadores pelo IMD/UFRN. Tenho
-            expertise em HTML, CSS, JavaScript, React dentre outras bibliotecas
-            e frameworks, além de estar sempre buscando aprimorar minhas
-            habilidades. Meu objetivo é me tornar um desenvolvedor fullstack.
-            Estou pronto para contribuir em projetos desafiadores.
+            Atualmente, estou matriculado no curso técnico de Redes de
+            Computadores no IMD/UFRN. Possuo habilidades em HTML, CSS,
+            JavaScript, React e diversas outras bibliotecas e frameworks
+            relacionados ao desenvolvimento front-end. Estou constantemente em
+            busca de aprimorar minhas habilidades e aprender novas tecnologias.
+            Meu objetivo a longo prazo é me tornar um desenvolvedor full-stack e
+            estou preparado para contribuir em projetos desafiadores.
           </Description>
 
           <Button label="Download CV" />
@@ -87,7 +88,7 @@ const StyledDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50rem;
+  width: 60rem;
   @media (max-width: 480px) {
     align-items: center;
     width: 35rem;
