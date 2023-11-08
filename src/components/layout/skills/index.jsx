@@ -13,8 +13,14 @@ const Skills = () => {
 
       <SkillsList>
         {data.map((item) => (
-          <StyledLi key={item.id} color={item.color}>
-            <Img src={item.image} alt={item.name} title={item.name} />
+          <StyledLi key={item.id}>
+            <Img
+              src={item.image}
+              alt={item.name}
+              title={item.name}
+              color={item.color}
+            />
+            <StyledP>{item.name}</StyledP>
           </StyledLi>
         ))}
       </SkillsList>
@@ -32,23 +38,11 @@ const Section = styled.section`
   }
 `;
 
-const StyledLi = styled.li`
-  transition: 0.5s;
-
-  border-radius: 22px;
-  &:hover {
-    transform: scale(1.1);
-    background-color: ${(props) => props.color};
-
-    border-color: ${(props) => props.color};
-    border-radius: 50%;
-
-    box-shadow: 0 0 25px ${(props) => props.color};
-
-    box-shadow: 0 0 5px ${(props) => props.color},
-      0 0 25px ${(props) => props.color}, 0 0 50px ${(props) => props.color},
-      0 0 100px ${(props) => props.color};
-  }
+const StyledP = styled.p`
+  font-size: var(--small-font-size);
+  color: var(--quaternary-color);
+  text-align: center;
+  margin-top: 1rem;
 `;
 
 const FloatAnimation = keyframes`
@@ -78,9 +72,27 @@ const SkillsList = styled.ul`
   }
 `;
 
+const StyledLi = styled.li``;
+
 const Img = styled.img`
   width: 100px;
   height: 100px;
+
+  transition: 0.5s;
+
+  border-radius: 22px;
+  &:hover {
+    transform: scale(1.1);
+    background-color: ${(props) => props.color};
+
+    border-color: ${(props) => props.color};
+
+    box-shadow: 0 0 25px ${(props) => props.color};
+
+    box-shadow: 0 0 5px ${(props) => props.color},
+      0 0 25px ${(props) => props.color}, 0 0 50px ${(props) => props.color},
+      0 0 100px ${(props) => props.color};
+  }
 `;
 
 const Title = styled.h1`

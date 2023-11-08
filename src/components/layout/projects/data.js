@@ -24,7 +24,8 @@ const data = [
       "https://firebasestorage.googleapis.com/v0/b/portfolio-4e712.appspot.com/o/Projetos%2Fprojeto3.png?alt=media&token=973d6cb7-4cc4-4b7c-9831-5e0dbcdf2aa9",
     github: "https://github.com/Fransuelton/advice-generator-app",
     deploy: "https://fransuelton.github.io/advice-generator-app/",
-    description: "Desenvolvido com HTML, CSS, JavaScript e integração com a API Advice Slip JSON API.",
+    description:
+      "Desenvolvido com HTML, CSS, JavaScript e integração com a API Advice Slip JSON API.",
   },
   {
     id: 4,
@@ -33,7 +34,8 @@ const data = [
       "https://firebasestorage.googleapis.com/v0/b/portfolio-4e712.appspot.com/o/Projetos%2Fprojeto4.png?alt=media&token=41b0824c-1230-42b2-99ed-0a4d422b85a1",
     github: "https://github.com/Fransuelton/calcula-saude-imc",
     deploy: "https://fransuelton.github.io/calcula-saude-imc/",
-    description: "[Em Desenvolvimento] Projeto de cálculo de IMC desenvolvido com HTML, CSS e JavaScript e Testes com Jest.",
+    description:
+      "[Em Desenvolvimento] Projeto de cálculo de IMC desenvolvido com HTML, CSS e JavaScript e Testes com Jest.",
   },
 ];
 

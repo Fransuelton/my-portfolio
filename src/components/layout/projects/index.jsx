@@ -39,10 +39,7 @@ const Projects = () => {
         </p>
       </InfoContainer>
 
-      <Swiper
-        slidesPerView={slidePerView}
-        navigation
-      >
+      <Swiper slidesPerView={slidePerView} navigation>
         {data.map((item) => (
           <SwiperSlide key={item.id}>
             <Image src={item.image} alt={item.name} />

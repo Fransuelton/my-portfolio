@@ -50,15 +50,16 @@ const StyledHeader = styled.header`
 
 const HeaderContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   padding: 1rem 4rem;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const Img = styled.img`
-  width: 6.5rem;
-  height: 6.5rem;
+  width: 6rem;
+  height: 6rem;
   transition: 0.3s;
+  margin-right: 2rem;
 
   &:hover {
     opacity: 0.8;
@@ -202,7 +203,7 @@ const StyledA = styled.a`
 
   @media (max-width: 850px) {
     text-align: center;
-    padding: 2rem;
+    margin-bottom: 3rem;
     display: block;
   }
 `;

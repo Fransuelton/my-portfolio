@@ -3,11 +3,19 @@ import { styled } from "styled-components";
 
 const Contact = () => {
   return (
-    <StyledSection id="contact" data-aos="fade-in" data-aos-easing="ease-in-out" data-aos-mirror="true">
+    <StyledSection
+      id="contact"
+      data-aos="fade-in"
+      data-aos-easing="ease-in-out"
+      data-aos-mirror="true"
+    >
       <StyledDiv>
         <StyledH1>Me envie uma Mensagem!</StyledH1>
         <Description>
-        Estou aberto a oportunidades e parcerias emocionantes. Seja para colaborar em projetos, discutir ideias ou apenas trocar experiências, estou à disposição. Vamos iniciar uma conversa e explorar as possibilidades juntos.
+          Estou aberto a oportunidades e parcerias emocionantes. Seja para
+          colaborar em projetos, discutir ideias ou apenas trocar experiências,
+          estou à disposição. Vamos iniciar uma conversa e explorar as
+          possibilidades juntos.
         </Description>
       </StyledDiv>
       <ContactForm />

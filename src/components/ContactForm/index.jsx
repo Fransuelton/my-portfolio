@@ -102,6 +102,6 @@ const SucessMessage = styled.p`
   @media (max-width: 480px) {
     font-size: 1.6rem;
   }
-`
+`;
 
 export { ContactForm };
