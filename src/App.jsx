@@ -24,19 +24,29 @@ function App() {
 
 const GlobalStyle = createGlobalStyle`
 
+:root {
+  --primary-color: #121212;
+  --secondary-color: #222831;
+  --tertiary-color: #008cff;
+  --quaternary-color: #ffffff;
+}
+
+:root {
+  --large-font-size: 4rem;
+  --medium-font-size: 3.2rem;
+  --small-font-size: 2rem;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Sora", sans-serif;
+  list-style: none;
 }
 
 html {
   font-size: 62.5%;
-}
-
-ul {
-  list-style: none;
 }
 
 a {
@@ -45,6 +55,20 @@ a {
 
 body {
   background-color: var(--primary-color);
+}
+
+/* scroll bar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--tertiary-color);
+  border-radius: 20px;
 }
 
 `;

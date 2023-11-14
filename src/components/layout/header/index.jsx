@@ -1,12 +1,11 @@
 import { styled } from "styled-components";
-import "../../../styles/variables.css";
 
 const Header = () => {
   return (
     <StyledHeader>
       <HeaderContainer>
         <a href="#">
-          <Img src="/logo.svg" alt="" />
+          <Img src="/logo.svg" alt="Logo estilizada da letra F" />
         </a>
 
         <StyledNav>
@@ -97,7 +96,7 @@ const StyledNav = styled.nav`
 
   @media (max-width: 850px) {
     position: absolute;
-    top: 2rem;
+    top: 1rem;
     right: 0;
     z-index: 2;
   }

@@ -11,19 +11,19 @@ const Skills = () => {
     >
       <Title>Minhas Habilidades</Title>
 
-      <SkillsList>
+      <StyledUl>
         {data.map((item) => (
           <StyledLi key={item.id}>
             <Img
               src={item.image}
-              alt={item.name}
+              alt={`Logo do ${item.name}`}
               title={item.name}
               color={item.color}
             />
             <StyledP>{item.name}</StyledP>
           </StyledLi>
         ))}
-      </SkillsList>
+      </StyledUl>
     </Section>
   );
 };
@@ -57,7 +57,7 @@ const FloatAnimation = keyframes`
   }
 `;
 
-const SkillsList = styled.ul`
+const StyledUl = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;

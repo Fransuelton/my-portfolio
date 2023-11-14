@@ -1,4 +1,5 @@
-import { Button } from "../../Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { styled, keyframes } from "styled-components";
 
 const About = () => {
@@ -12,7 +13,7 @@ const About = () => {
       <Title>Sobre mim</Title>
 
       <AboutContainer>
-        <StyledImg src="/art.png" alt="" />
+        <StyledImg src="../../../../src/assets/images/art.png" alt="" />
         <StyledDiv>
           <Description>
             Atualmente, estou matriculado no curso técnico de Redes de
@@ -24,7 +25,14 @@ const About = () => {
             estou preparado para contribuir em projetos desafiadores.
           </Description>
 
-          <Button label="Download CV" />
+          <StyledButton
+            href="https://drive.google.com/file/d/1WDVqY-55Wc1rAFuuAMqoz7sPUMu3kYdy/view"
+            target="_blank"
+          >
+            <StyledIcon icon={faFileArrowDown} />
+            Download CV
+          </StyledButton>
+          
         </StyledDiv>
       </AboutContainer>
     </Section>
@@ -105,6 +113,34 @@ const Description = styled.p`
     font-size: 1.6rem;
     width: 35rem;
   }
+`;
+
+const StyledButton = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 22rem;
+  height: 6rem;
+  padding: 1.6rem 3.2rem;
+  border-radius: 8px;
+  background-color: var(--secondary-color);
+  font-size: 1.5rem;
+  color: var(--quaternary-color);
+  font-weight: 700;
+  transition: 0.5s;
+  border: 1px solid #fff;
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--tertiary-color);
+    border-color: var(--tertiary-color);
+  }
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+  margin-right: 1rem;
+  font-size: 3rem;
 `;
 
 export { About };

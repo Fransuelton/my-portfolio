@@ -10,18 +10,24 @@ const ContactForm = () => {
   return (
     <StyledForm onSubmit={handleSubmit}>
       <StyledInput id="name" type="text" name="name" placeholder="Nome *" />
+
       <StyledInput
         id="email"
         type="email"
         name="email"
         placeholder="E-mail *"
       />
+
       <ValidationError prefix="Email" field="email" errors={state.errors} />
+
       <StyledTextArea id="message" name="message" placeholder="Mensagem *" />
+
       <ValidationError prefix="Message" field="message" errors={state.errors} />
+
       <StyledButton type="submit" disabled={state.submitting}>
         Enviar Mensagem
       </StyledButton>
+
     </StyledForm>
   );
 };
@@ -43,12 +49,12 @@ const StyledInput = styled.input`
   border-radius: 0.8rem;
   outline: none;
   background-color: var(--primary-color);
-  border: 1px solid #b3b3b3;
+  border: 1px solid #fff;
   color: var(--quaternary-color);
   font-size: 1.7rem;
 
   &::placeholder {
-    color: #b3b3b3;
+    color: #fff;
     font-size: 1.7rem;
   }
 `;
@@ -60,13 +66,13 @@ const StyledTextArea = styled.textarea`
   border: none;
   outline: none;
   background-color: var(--primary-color);
-  border: 1px solid #b3b3b3;
+  border: 1px solid #fff;
   resize: none;
   color: var(--quaternary-color);
   font-size: 1.7rem;
 
   &::placeholder {
-    color: #b3b3b3;
+    color: #fff;
     font-size: 1.7rem;
   }
 `;
@@ -79,13 +85,15 @@ const StyledButton = styled.button`
   padding: 1rem;
   border-radius: 0.8rem;
   background-color: var(--primary-color);
-  border: 1px solid #b3b3b3;
+  border: 1px solid #fff;
   font-size: 1.6rem;
   color: var(--quaternary-color);
   transition: 0.5s;
+  font-weight: 700;
 
   &:hover {
-    border: 1px solid var(--tertiary-color);
+    background-color: var(--tertiary-color);
+    border-color: var(--tertiary-color);
   }
 
   @media (max-width: 480px) {

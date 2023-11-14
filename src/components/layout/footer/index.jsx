@@ -17,17 +17,17 @@ const Footer = () => {
         <nav>
           <StyledUl>
             <li>
-              <a href="">
+              <a href="https://www.linkedin.com/in/fransuelton/" aria-label="Visite meu perfil no LinkedIn">
                 <StyledIcon icon={faLinkedin} inverse />
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="https://github.com/Fransuelton" aria-label="Visite meu perfil no GitHub">
                 <StyledIcon icon={faGithub} inverse />
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="https://api.whatsapp.com/send?phone=558499778995" aria-label="Visite meu perfil no WhatsApp">
                 <StyledIcon icon={faWhatsapp} inverse />
               </a>
             </li>

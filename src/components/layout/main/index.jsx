@@ -1,6 +1,5 @@
 import { styled, keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../../styles/variables.css";
 import {
   faLinkedin,
   faGithub,
@@ -17,18 +16,30 @@ const Main = () => {
 
           <SocialIconsList>
             <li>
-              <a href="https://www.linkedin.com/in/fransuelton/">
-                <StyledIcon icon={faLinkedin} inverse />
+              <a href="https://www.linkedin.com/in/fransuelton/" aria-label="Visite meu perfil no LinkedIn">
+                <StyledIcon
+                  icon={faLinkedin}
+                  hovercolor="rgb(4%, 40%, 76%)"
+                  inverse
+                />
               </a>
             </li>
             <li>
-              <a href="https://github.com/Fransuelton">
-                <StyledGithubIcon icon={faGithub} inverse />
+              <a href="https://github.com/Fransuelton" aria-label="Visite meu perfil no GitHub">
+                <StyledIcon
+                  icon={faGithub}
+                  hovercolor="rgb(36, 41, 46)"
+                  inverse
+                />
               </a>
             </li>
             <li>
-              <a href="https://api.whatsapp.com/send?phone=558499778995">
-                <StyledWhatsappIcon icon={faWhatsapp} inverse />
+              <a href="https://api.whatsapp.com/send?phone=558499778995" aria-label="Visite meu perfil no WhatsApp">
+                <StyledIcon
+                  icon={faWhatsapp}
+                  hovercolor="rgb(0%, 90%, 46%)"
+                  inverse
+                />
               </a>
             </li>
           </SocialIconsList>
@@ -59,18 +70,6 @@ const blinkCaretAnimation = keyframes`
   }
   50% {
     border-color: white;
-  }
-`;
-
-const FloatAnimation = keyframes`
-  0%{
-    transform: translate(0px);
-  }
-  50%{
-    transform: translateY(-10px)
-  }
-  100%{
-    transform: translateY(0px)
   }
 `;
 
@@ -141,8 +140,6 @@ const Img = styled.img`
   height: 350px;
   object-fit: cover;
 
-  animation: ${FloatAnimation} 10s ease-out infinite;
-
   @media (max-width: 500px) {
     width: 33rem;
     height: 33rem;
@@ -154,57 +151,22 @@ const StyledIcon = styled(FontAwesomeIcon)`
   height: 3.5rem;
   border: 1px solid var(--quaternary-color);
   padding: 1rem;
-  border-radius: 50%;
+  border-radius: 30%;
 
-  transition: 0.5s;
-
-  &:hover {
-    background-color: rgb(4%, 40%, 76%);
-
-    border-color: rgb(4%, 40%, 76%);
-    border-radius: 20%;
-
-    box-shadow: 0 0 25px rgb(4%, 40%, 76%);
-
-    box-shadow: 0 0 5px rgb(4%, 40%, 76%), 0 0 25px rgb(4%, 40%, 76%),
-      0 0 50px rgb(4%, 40%, 76%), 0 0 100px rgb(4%, 40%, 76%);
-  }
-`;
-
-const StyledWhatsappIcon = styled(FontAwesomeIcon)`
-  width: 3.5rem;
-  height: 3.5rem;
-  border: 1px solid var(--quaternary-color);
-  padding: 1rem;
-
-  border-radius: 50%;
-
-  transition: 0.5s;
+  transition: 0.5s ease-in-out;
 
   &:hover {
-    background-color: rgb(0%, 90%, 46%);
+    background-color: ${(props) => props.hovercolor};
 
-    border-color: rgb(0%, 90%, 46%);
+    border-color: ${(props) => props.hovercolor};
     border-radius: 20%;
 
-    box-shadow: 0 0 25px rgb(0%, 90%, 46%);
+    box-shadow: 0 0 25px ${(props) => props.hovercolor};
 
-    box-shadow: 0 0 5px rgb(0%, 90%, 46%), 0 0 25px rgb(0%, 90%, 46%),
-      0 0 50px rgb(0%, 90%, 46%), 0 0 100px rgb(0%, 90%, 46%);
-  }
-`;
-
-const StyledGithubIcon = styled(FontAwesomeIcon)`
-  width: 3.5rem;
-  height: 3.5rem;
-  border: 1px solid var(--quaternary-color);
-  padding: 1rem;
-  border-radius: 50%;
-
-  transition: 0.5s;
-
-  &:hover {
-    border-radius: 20%;
+    box-shadow: 0 0 5px ${(props) => props.hovercolor},
+      0 0 25px ${(props) => props.hovercolor},
+      0 0 50px ${(props) => props.hovercolor},
+      0 0 100px ${(props) => props.hovercolor};
   }
 `;
 
