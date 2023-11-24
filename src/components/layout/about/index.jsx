@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { styled, keyframes } from "styled-components";
+import artImage from "../../../assets/images/art.png";
 
 const About = () => {
   return (
@@ -13,7 +14,7 @@ const About = () => {
       <Title>Sobre mim</Title>
 
       <AboutContainer>
-        <StyledImg src="../src/assets/images/art.png" alt="" />
+        <StyledImg src={artImage} alt="" />
         <StyledDiv>
           <Description>
             Atualmente, estou matriculado no curso técnico de Redes de
