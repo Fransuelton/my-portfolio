@@ -1,6 +1,6 @@
 <br/>
 <p align="center">
-    <img src="./public/readme/thumbnail-portfolio.jpg" alt="Thumbnail Portfólio">
+    <img src="./src/assets/images/readme/thumbnail-portfolio.png" alt="Thumbnail Portfólio">
   </a>
 
   <h1 align="center">Portfólio</h1>
@@ -29,7 +29,7 @@
 
 ## 📺 Demonstração do Projeto
 
-![Demonstração do Projeto](./public/readme/projeto.gif)
+![Demonstração do Projeto](./src/assets/images/readme/projeto.gif)
 ## 💻 Tecnologias Utilizadas
 
 Neste projeto, utilizei as seguintes tecnologias e ferramentas:
