@@ -13,7 +13,7 @@ const About = () => {
       <Title>Sobre mim</Title>
 
       <AboutContainer>
-        <StyledImg src="./src/assets/images/icons/art.png" alt="" />
+        <StyledImg src="../src/assets/images/art.png" alt="" />
         <StyledDiv>
           <Description>
             Atualmente, estou matriculado no curso técnico de Redes de
