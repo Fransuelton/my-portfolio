@@ -46,7 +46,7 @@ const Main = () => {
         </InfoContainer>
 
         <Img
-          src="https://media.licdn.com/dms/image/D4D03AQEk2Bf43_zSiw/profile-displayphoto-shrink_800_800/0/1701164167273?e=1706745600&v=beta&t=Ww60f9npTGUYcrd2-T92h3JzqF_oz76r43B8wWZRtFM"
+          src="https://media.licdn.com/dms/image/D4D03AQEk2Bf43_zSiw/profile-displayphoto-shrink_800_800/0/1701164167273?e=1713398400&v=beta&t=DYbA_kgcORSFOKjj1XW4nt4Kb5z0bRDBj6_QZLoaACk"
           alt="Foto principal"
           title="Foto de Perfil"
         />
