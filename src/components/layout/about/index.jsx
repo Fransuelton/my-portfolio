@@ -17,13 +17,7 @@ const About = () => {
         <StyledImg src={artImage} alt="" />
         <StyledDiv>
           <Description>
-            Atualmente, estou matriculado no curso técnico de Redes de
-            Computadores no IMD/UFRN. Possuo habilidades em HTML, CSS,
-            JavaScript, React e diversas outras bibliotecas e frameworks
-            relacionados ao desenvolvimento front-end. Estou constantemente em
-            busca de aprimorar minhas habilidades e aprender novas tecnologias.
-            Meu objetivo a longo prazo é me tornar um desenvolvedor full-stack e
-            estou preparado para contribuir em projetos desafiadores.
+          Minha história com a programação se iniciou em agosto de 2022, Foi lá que fiz meu primeiro “Hello World”. É desde então venho estudando e aprimorando minhas habilidades em desenvolvimento web focado em front-end mas também estou estudando back-end (inclusive já fiz alguns projetos). Um dos meus objetivos para o futuro é me tornar um dev fullstack. É estou preparado para contribuir em projetos desafiadores.
           </Description>
 
           <StyledButton
