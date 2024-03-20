@@ -12,7 +12,7 @@ const Main = () => {
       <StyledContainer>
         <InfoContainer>
           <Title>Fransuelton Francisco</Title>
-          <VacantTitle>Desenvolvedor Front-end</VacantTitle>
+          <VacantTitle>Desenvolvedor de Software</VacantTitle>
 
           <SocialIconsList>
             <li>
