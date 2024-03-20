@@ -17,7 +17,7 @@ const About = () => {
         <StyledImg src={artImage} alt="" />
         <StyledDiv>
           <Description>
-          Minha história com a programação se iniciou em agosto de 2022, Foi lá que fiz meu primeiro “Hello World”. É desde então venho estudando e aprimorando minhas habilidades em desenvolvimento web focado em front-end mas também estou estudando back-end (inclusive já fiz alguns projetos). Um dos meus objetivos para o futuro é me tornar um dev fullstack. É estou preparado para contribuir em projetos desafiadores.
+          Desenvolvedor de Software desde 2022, com foco em Front End, atualmente estou cursando Engenharia de Software na Estácio. Também possuo formação como Técnico em Redes de Computadores pelo IMD/UFRN. Estou continuamente aprimorando minhas habilidades, tanto em termos técnicos quanto em soft skills, e estou sempre pronto para abraçar novos desafios que impulsionem meu crescimento profissional.
           </Description>
 
           <StyledButton
