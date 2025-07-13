@@ -122,4 +122,4 @@ const ServiceCard = styled.div`
   }
 `;
 
-export default Services;
+export {Services};
