@@ -5,3 +5,4 @@ export { Skills } from "./layout/skills";
 export { Footer } from "./layout/footer";
 export { Contact } from "./layout/contact";
 export { Projects } from "./layout/projects";
+export { Services } from "./layout/services";
