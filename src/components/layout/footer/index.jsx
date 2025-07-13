@@ -1,86 +1,45 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLinkedin,
-  faGithub,
-  faWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 const Footer = () => {
   return (
-    <StyledFooter>
+    <footer>
       <Container>
         <CopyrightText>
-          Copyright © 2023 Fransuelton. Todos os direitos reservados.
+          © 2023-2025 Fransuelton. <span>Todos os direitos reservados.</span>
         </CopyrightText>
 
-        <nav>
-          <StyledUl>
-            <li>
-              <a href="https://www.linkedin.com/in/fransuelton/" aria-label="Visite meu perfil no LinkedIn">
-                <StyledIcon icon={faLinkedin} inverse />
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/Fransuelton" aria-label="Visite meu perfil no GitHub">
-                <StyledIcon icon={faGithub} inverse />
-              </a>
-            </li>
-            <li>
-              <a href="https://api.whatsapp.com/send?phone=558499778995" aria-label="Visite meu perfil no WhatsApp">
-                <StyledIcon icon={faWhatsapp} inverse />
-              </a>
-            </li>
-          </StyledUl>
-        </nav>
+        <a href="#">
+          <FontAwesomeIcon icon={faArrowUp} />
+        </a>
       </Container>
-    </StyledFooter>
+    </footer>
   );
 };
 
-const StyledFooter = styled.footer`
-  background-color: var(--secondary-color);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.75);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.125);
-`;
-
 const Container = styled.div`
-  padding: 2rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 2rem 0;
 
-  @media (max-width: 480px) {
-    flex-direction: column-reverse;
-    gap: 2rem;
+  a {
+    font-size: 2.4rem;
+    padding: 1rem 1.6rem;
+    background-color: #202024;
+    border-radius: 0.8rem;
   }
-`;
 
-const StyledUl = styled.ul`
-  display: flex;
-  gap: 2rem;
+  span {
+    font-weight: 500;
+    display: block;
+  }
 `;
 
 const CopyrightText = styled.p`
   font-size: 1.6rem;
-  color: var(--quaternary-color);
-  @media (max-width: 480px) {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-`;
-
-const StyledIcon = styled(FontAwesomeIcon)`
-  width: 3rem;
-  height: 3rem;
-  transition: 0.5s;
-
-  &:hover {
-    transform: scale(1.2);
-  }
+  color: #ffffff;
 `;
 
 export { Footer };

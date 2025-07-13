@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { styled, keyframes } from "styled-components";
-import artImage from "../../../assets/images/art.png";
+import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import { styled } from "styled-components";
 
 const About = () => {
   return (
@@ -11,125 +10,120 @@ const About = () => {
       data-aos-easing="ease-in-out"
       data-aos-mirror="true"
     >
-      <Title>Sobre mim</Title>
-
       <AboutContainer>
-        <StyledImg src={artImage} alt="" />
-        <StyledDiv>
+        <StyledImg
+          src="https://avatars.githubusercontent.com/u/107893416?v=4"
+          alt="Foto profissional de Fransuelton, Desenvolvedor Fullstack"
+        />
+        <div>
+          <StyledTitle>
+            Desenvolvedor Fullstack com foco em Back-End.
+          </StyledTitle>
           <Description>
-          Desenvolvedor de Software desde 2022, com foco em Front End, atualmente estou cursando Engenharia de Software na Estácio. Também possuo formação como Técnico em Redes de Computadores pelo IMD/UFRN. Estou continuamente aprimorando minhas habilidades, tanto em termos técnicos quanto em soft skills, e estou sempre pronto para abraçar novos desafios que impulsionem meu crescimento profissional.
+            Crio APIs robustas, sistemas personalizados e landing pages de alta
+            performance, sempre com foco em escalabilidade e qualidade de
+            código. Tenho experiência prática com JavaScript, React, Node.js e
+            MySQL. Atualmente curso Engenharia de Software e possuo formação
+            técnica em Redes de Computadores. Estou em constante evolução,
+            desenvolvendo tanto minhas habilidades técnicas quanto
+            comportamentais, e estou sempre pronto para encarar novos desafios
+            que impulsionem meu crescimento profissional.
           </Description>
 
           <StyledButton
-            href="https://drive.google.com/file/d/1WDVqY-55Wc1rAFuuAMqoz7sPUMu3kYdy/view"
+            href="https://drive.google.com/file/d/1y-HLnC2XmD5PPHmWULrOWNi-zAJfXmXZ/view?usp=sharing"
             target="_blank"
+            rel="noopener noreferrer"
           >
-            <StyledIcon icon={faFileArrowDown} />
-            Download CV
+            <StyledIcon icon={faFilePdf} />
+            Acessar CV
           </StyledButton>
-          
-        </StyledDiv>
+        </div>
       </AboutContainer>
     </Section>
   );
 };
 
-const FloatAnimation = keyframes`
-  0%{
-    transform: translate(0px);
-  }
-  50%{
-    transform: translateY(-20px)
-  }
-  100%{
-    transform: translateY(0px)
-  }
-`;
-
-const StyledImg = styled.img`
-  animation: ${FloatAnimation} 5s ease infinite;
-
-  @media (max-width: 480px) {
-    width: 35rem;
-    height: 35rem;
-  }
-`;
-
 const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 17.2rem 15.9rem;
-
-  @media (max-width: 480px) {
-    text-align: center;
-    margin: 17.2rem 0;
-  }
-`;
-
-const Title = styled.h1`
-  color: var(--quaternary-color);
-  font-size: var(--large-font-size);
-  margin-bottom: 8rem;
-  text-transform: uppercase;
+  text-align: left;
+  background-color: #202024;
+  border-radius: 1.6rem;
+  margin-bottom: 20rem;
+  padding: 2rem;
 `;
 
 const AboutContainer = styled.div`
   display: flex;
-  gap: 6rem;
-  text-align: center;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  width: 80%;
+  margin: 0 auto;
 
   @media (max-width: 480px) {
     flex-direction: column;
+    text-align: center;
     align-items: center;
+    gap: 2rem;
+    width: 100%;
   }
 `;
 
-const StyledDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 60rem;
-  @media (max-width: 480px) {
-    align-items: center;
-    width: 35rem;
-  }
+const StyledImg = styled.img`
+  width: 30rem;
+  height: 30rem;
+`;
+
+const StyledTitle = styled.p`
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  align-self: flex-start;
 `;
 
 const Description = styled.p`
-  font-size: var(--small-font-size);
-  color: var(--quaternary-color);
-  font-weight: 400;
+  font-size: 1.6rem;
+  color: #c6c6c6;
   margin-bottom: 3rem;
+  text-align: left;
+  line-height: 1.6;
+  font-weight: 400;
 
   @media (max-width: 480px) {
-    font-size: 1.6rem;
-    width: 35rem;
+    text-align: center;
   }
 `;
 
 const StyledButton = styled.a`
   display: flex;
   align-items: center;
+  align-self: flex-start;
   justify-content: center;
   cursor: pointer;
   width: 22rem;
   height: 6rem;
   padding: 1.6rem 3.2rem;
   border-radius: 8px;
-  background-color: var(--secondary-color);
+  background-color: var(--tertiary-color);
   font-size: 1.5rem;
   color: var(--quaternary-color);
-  font-weight: 700;
   transition: 0.5s;
-  border: 1px solid #fff;
+  border: none;
+  font-weight: 500;
   text-decoration: none;
 
   &:hover {
-    background-color: var(--tertiary-color);
-    border-color: var(--tertiary-color);
+    background-color: #fff;
+    color: var(--tertiary-color);
+    border-color: #fff;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

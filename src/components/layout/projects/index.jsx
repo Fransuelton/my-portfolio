@@ -1,142 +1,142 @@
-import { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { data } from "./data";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { ProjectCard } from "./projectCard.jsx";
+import {
+  SiExpress,
+  SiJsonwebtokens,
+  SiNodedotjs,
+  SiVite,
+  SiTypescript,
+  SiMysql,
+  SiLaravel,
+  SiMongodb,
+  SiPhp,
+  SiVuedotjs,
+  SiJavascript,
+} from "react-icons/si";
 
 const Projects = () => {
-  const [slidePerView, setSlidePerView] = useState(2);
-
-  useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth < 720) {
-        setSlidePerView(1);
-      } else {
-        setSlidePerView(2);
-      }
-    }
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
-    <Container
+    <StyledSection
       id="projects"
       data-aos="fade-in"
       data-aos-easing="ease-in-out"
       data-aos-mirror="true"
     >
-      <InfoContainer>
-        <h1>Meus Projetos</h1>
-        <p>
-          Neste espaço, apresento uma seleção de projetos que desenvolvi,
-          demonstrando proficiência na utilização de tecnologias de frontend.
-        </p>
-      </InfoContainer>
+      <StyledHeader>
+        <div>
+          <h1>Projetos em Destaque</h1>
+          <p>Meus principais projetos Frontend, Backend e Fullstack.</p>
+        </div>
 
-      <Swiper slidesPerView={slidePerView} navigation>
-        {data.map((item) => (
-          <SwiperSlide key={item.id}>
-            <Image src={item.image} alt={item.name} />
-            <StyledDiv>
-              <ProjectName>{item.name}</ProjectName>
-              <Description>{item.description}</Description>
-              <LinkContainer>
-                <a href={item.deploy}>Deploy</a>
-                <a href={item.github}>Repositório</a>
-              </LinkContainer>
-            </StyledDiv>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </Container>
+        <a
+          href="https://github.com/Fransuelton?tab=repositories"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver todos os projetos
+          <FontAwesomeIcon icon={faArrowRight} />
+        </a>
+      </StyledHeader>
+
+      <ProjectsWrapper>
+        <ProjectCard
+          image="https://github.com/Fransuelton/devlinks/raw/main/.github/project.jpg"
+          name="DevLiks"
+          description="Árvore de links personalizável inspirada no LinkTree, desenvolvida com Vue.js + TypeScript. Permite adicionar botões para redes sociais, portfólio e contatos com fácil manutenção e design responsivo."
+          deployUrl="https://fransuelton.dev/links/"
+          repositoryUrl="https://github.com/Fransuelton/devlinks"
+          techIcons={[SiVuedotjs, SiTypescript, SiJavascript, SiVite]}
+          buttonText="Deploy"
+        />
+        <ProjectCard
+          image="../../../../src/assets/images/cover-authjs.webp"
+          name="AuthJS"
+          description="Sistema de autenticação completo com Node.js, JWT, MongoDB e verificação de e-mail. Inclui login seguro, rotas protegidas e medidas contra ataques de força bruta."
+          deployUrl="https://auth-js-gmtn.onrender.com"
+          repositoryUrl="https://github.com/Fransuelton/auth-js"
+          techIcons={[SiNodedotjs, SiExpress, SiMongodb, SiJsonwebtokens]}
+          buttonText="API Deploy"
+        />
+
+        <ProjectCard
+          image="https://github.com/Fransuelton/test-sync360/blob/main/.github/readme/screenshots/profile-desktop.png?raw=true"
+          name="Perfil de Usuário"
+          description="Aplicação fullstack moderna com Laravel e Vue.js desenvolvida como desafio técnico. Sistema completo de perfis com CRUD, upload de imagem, validações robustas, arquitetura escalável e testes automatizados."
+          deployUrl="https://test-sync360.vercel.app/"
+          repositoryUrl="https://github.com/Fransuelton/test-sync360"
+          techIcons={[SiLaravel, SiPhp, SiMysql, SiVuedotjs]}
+          buttonText="Deploy"
+        />
+      </ProjectsWrapper>
+    </StyledSection>
   );
 };
 
-const Container = styled.section`
-  text-align: center;
-  margin-bottom: 22rem;
+const StyledSection = styled.section`
+  margin-bottom: 20rem;
 `;
 
-const StyledDiv = styled.div`
+const StyledHeader = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-
-  @media (max-width: 480px) {
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-
-const LinkContainer = styled.div`
-  display: flex;
-  gap: 3rem;
-  font-size: 1.6rem;
-`;
-
-const Description = styled.p`
-  font-size: 1.6rem;
-  color: #f7f7f7;
-  width: 50rem;
-
-  @media (max-width: 480px) {
-    width: 35rem;
-    text-align: center;
-  }
-`;
-
-const Image = styled.img`
-  border-radius: 2rem;
-
-  @media (max-width: 480px) {
-    border-radius: 1rem;
-    width: 30rem;
-  }
-`;
-
-const ProjectName = styled.h2`
-  font-size: var(--small-font-size);
-  color: var(--quaternary-color);
-  margin: 1rem 0;
-`;
-
-const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  color: var(--quaternary-color);
-  margin: 5rem;
+  color: #ffffff;
 
   h1 {
-    font-size: var(--large-font-size);
+    font-size: 3.6rem;
     margin-bottom: 1rem;
-    text-transform: uppercase;
   }
 
   p {
     font-size: 1.6rem;
-    color: #f7f7f7;
-    width: 60rem;
+    color: #ffffff;
+  }
+
+  a {
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 0.1rem solid #ffffff;
+    padding: 1.6rem 2.4rem;
+    border-radius: 0.5rem;
+    color: #ffffff;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  a:hover {
+    background-color: var(--tertiary-color);
+    border-color: var(--tertiary-color);
   }
 
   @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     align-items: center;
+    gap: 2rem;
 
     h1 {
-      font-size: var(--medium-font-size);
+      font-size: 2.4rem;
     }
-    p {
-      width: 35rem;
-    }
+  }
+`;
+
+const ProjectsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 3rem;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
