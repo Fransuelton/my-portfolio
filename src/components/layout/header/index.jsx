@@ -5,7 +5,7 @@ const Header = () => {
     <StyledHeader>
       <HeaderContainer>
         <a href="#">
-          <Img src="/logo.svg" alt="Logo estilizada da letra F" />
+          <Img src="/logo.svg" alt="Fransuelton's portfolio logo" />
         </a>
 
         <StyledNav>
@@ -18,16 +18,21 @@ const Header = () => {
 
           <StyledUl>
             <li>
-              <StyledA href="#about">Sobre mim</StyledA>
+              <StyledA href="#about">Sobre</StyledA>
             </li>
             <li>
-              <StyledA href="#skills">Habilidades</StyledA>
+              <StyledA href="#services">Serviços</StyledA>
             </li>
             <li>
-              <StyledA href="#projects">Meus projetos</StyledA>
+              <StyledA href="#projects">Projetos</StyledA>
             </li>
             <li>
-              <StyledLink href="#contact">Entre em Contato</StyledLink>
+              <StyledA href="#contact">Contato</StyledA>
+            </li>
+            <li>
+              <StyledLink href="https://api.whatsapp.com/send?phone=558499778995">
+                Solicitar Orçamento
+              </StyledLink>
             </li>
           </StyledUl>
         </StyledNav>
@@ -40,16 +45,18 @@ const StyledHeader = styled.header`
   position: sticky;
   top: 0;
   z-index: 2;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.75);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.125);
+
+  /* From https://css.glass */
+  background: rgba(24, 24, 24, 0.48);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 1.6rem;
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
-  padding: 1rem 4rem;
+  padding: 1rem;
   justify-content: space-between;
   align-items: center;
 `;
@@ -58,7 +65,6 @@ const Img = styled.img`
   width: 6rem;
   height: 6rem;
   transition: 0.3s;
-  margin-right: 2rem;
 
   &:hover {
     opacity: 0.8;
@@ -90,13 +96,13 @@ const StyledInput = styled.input`
 `;
 
 const StyledNav = styled.nav`
-  font-size: var(--small-font-size);
+  font-size: 2rem;
   font-weight: 300;
   transition: 0.3s;
 
   @media (max-width: 850px) {
     position: absolute;
-    top: 1rem;
+    top: 2rem;
     right: 0;
     z-index: 2;
   }
@@ -155,11 +161,9 @@ const StyledUl = styled.ul`
   @media (max-width: 850px) {
     display: none;
     width: 28rem;
-    height: 32rem;
+    height: 100vh;
     padding: 2rem;
-    background-color: #121823;
-    border-radius: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.125);
+    background-color: #181818;
   }
 `;
 
@@ -168,15 +172,15 @@ const StyledLink = styled.a`
   padding: 1rem 3rem;
   border-radius: 1rem;
   font-size: var(--small-font-size);
-  transition: 0.5s;
-  transition-property: box-shadow;
-  box-shadow: 0 0 25px rgb(0, 140, 255);
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
   text-decoration: none;
   text-transform: capitalize;
+  font-weight: 500;
 
   &:hover {
-    box-shadow: 0 0 5px rgb(0, 140, 255), 0 0 25px rgb(0, 140, 255),
-      0 0 50px rgb(0, 140, 255), 0 0 100px rgb(0, 140, 255);
+    background-color: #fff;
+    color: var(--tertiary-color);
+    border-color: #fff;
   }
 
   @media (max-width: 850px) {
@@ -187,16 +191,12 @@ const StyledLink = styled.a`
 `;
 
 const StyledA = styled.a`
-  background: linear-gradient(currentColor 0 0) bottom left/
-    var(--underline-width, 0%) 0.1em no-repeat;
   color: #fff;
-  display: inline-block;
   text-decoration: none;
-  transition: background-size 0.5s ease-in-out, color 0.5s ease-in-out;
+  transition: background-size 0.3s ease-in-out, color 0.3s ease-in-out;
   text-transform: capitalize;
 
   &:hover {
-    --underline-width: 100%;
     color: var(--tertiary-color);
   }
 
