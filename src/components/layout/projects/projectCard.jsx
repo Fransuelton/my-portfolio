@@ -28,10 +28,10 @@ const ProjectCard = ({
         <ProjectDescription>{description}</ProjectDescription>
       </InfoContainer>
       <LinkContainer>
-        <a href={repositoryUrl}>
+        <a href={repositoryUrl} target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faGithub} /> Repositório
         </a>
-        <a href={deployUrl}>
+        <a href={deployUrl} target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faGlobe} />
           {buttonText}
         </a>
