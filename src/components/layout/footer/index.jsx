@@ -7,7 +7,7 @@ const Footer = () => {
     <footer>
       <Container>
         <CopyrightText>
-          © 2023-2025 Fransuelton. Todos os direitos reservados.
+          © 2023-2025 Fransuelton. <span>Todos os direitos reservados.</span>
         </CopyrightText>
 
         <a href="#">
@@ -29,6 +29,11 @@ const Container = styled.div`
     padding: 1rem 1.6rem;
     background-color: #202024;
     border-radius: 0.8rem;
+  }
+
+  span {
+    font-weight: 500;
+    display: block;
   }
 `;
 
