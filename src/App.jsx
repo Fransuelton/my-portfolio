@@ -3,7 +3,7 @@ import {
   Header,
   Main,
   About,
-  Skills,
+  Services,
   Footer,
   Contact,
   Projects,
@@ -16,7 +16,7 @@ function App() {
       <Header />
       <Main />
       <About />
-      <Skills />
+      <Services />
       <Projects />
       <Contact />
       <Footer />
@@ -43,12 +43,13 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: "Epilogue", sans-serif;
   list-style: none;
 }
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -56,8 +57,15 @@ a {
 }
 
 body {
-  background-color: var(--primary-color);
+  background-color: #181818;
+  max-width: 192rem;
+  margin: 0 auto;
 }
+
+section,footer,header {
+  margin: 0 2rem;
+}
+
 
 /* scroll bar */
 ::-webkit-scrollbar {
