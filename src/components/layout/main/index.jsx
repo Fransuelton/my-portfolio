@@ -1,10 +1,4 @@
 import { styled, keyframes } from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLinkedin,
-  faGithub,
-  faWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
 
 const Main = () => {
   return (
@@ -12,44 +6,8 @@ const Main = () => {
       <StyledContainer>
         <InfoContainer>
           <Title>Fransuelton Francisco</Title>
-          <VacantTitle>Desenvolvedor de Software</VacantTitle>
-
-          <SocialIconsList>
-            <li>
-              <a href="https://www.linkedin.com/in/fransuelton/" aria-label="Visite meu perfil no LinkedIn">
-                <StyledIcon
-                  icon={faLinkedin}
-                  hovercolor="rgb(4%, 40%, 76%)"
-                  inverse
-                />
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/Fransuelton" aria-label="Visite meu perfil no GitHub">
-                <StyledIcon
-                  icon={faGithub}
-                  hovercolor="rgb(36, 41, 46)"
-                  inverse
-                />
-              </a>
-            </li>
-            <li>
-              <a href="https://api.whatsapp.com/send?phone=558499778995" aria-label="Visite meu perfil no WhatsApp">
-                <StyledIcon
-                  icon={faWhatsapp}
-                  hovercolor="rgb(0%, 90%, 46%)"
-                  inverse
-                />
-              </a>
-            </li>
-          </SocialIconsList>
+          <VacantTitle>Desenvolvedor Fullstack</VacantTitle>
         </InfoContainer>
-
-        <Img
-          src="https://avatars.githubusercontent.com/u/107893416?v=4"
-          alt="Foto principal"
-          title="Foto de Perfil"
-        />
       </StyledContainer>
     </StyledSection>
   );
@@ -76,7 +34,7 @@ const blinkCaretAnimation = keyframes`
 const StyledSection = styled.section`
   display: grid;
   place-items: center;
-  margin: 14rem 5rem;
+  height: 100vh;
 
   @media (max-width: 500px) {
     display: flex;
@@ -95,6 +53,7 @@ const StyledContainer = styled.div`
 `;
 
 const InfoContainer = styled.div`
+  text-align: center;
   @media (max-width: 500px) {
     display: flex;
     flex-direction: column;
@@ -119,7 +78,7 @@ const VacantTitle = styled.p`
   color: var(--tertiary-color);
   text-transform: uppercase;
   font-weight: 700;
-  margin: 1.6rem 0 4rem 0;
+  margin: 0 auto;
   overflow: hidden;
   border-right: 0.15em solid;
   white-space: nowrap;
@@ -131,51 +90,6 @@ const VacantTitle = styled.p`
   @media (max-width: 500px) {
     font-size: var(--small-font-size);
     letter-spacing: 0;
-  }
-`;
-
-const Img = styled.img`
-  border-radius: 50%;
-  width: 350px;
-  height: 350px;
-  object-fit: cover;
-
-  @media (max-width: 500px) {
-    width: 33rem;
-    height: 33rem;
-  }
-`;
-
-const StyledIcon = styled(FontAwesomeIcon)`
-  width: 3.5rem;
-  height: 3.5rem;
-  border: 1px solid var(--quaternary-color);
-  padding: 1rem;
-  border-radius: 30%;
-
-  transition: 0.5s ease-in-out;
-
-  &:hover {
-    background-color: ${(props) => props.hovercolor};
-
-    border-color: ${(props) => props.hovercolor};
-    border-radius: 20%;
-
-    box-shadow: 0 0 25px ${(props) => props.hovercolor};
-
-    box-shadow: 0 0 5px ${(props) => props.hovercolor},
-      0 0 25px ${(props) => props.hovercolor},
-      0 0 50px ${(props) => props.hovercolor},
-      0 0 100px ${(props) => props.hovercolor};
-  }
-`;
-
-const SocialIconsList = styled.ul`
-  display: flex;
-  gap: 2rem;
-
-  @media (max-width: 480px) {
-    justify-content: center;
   }
 `;
 

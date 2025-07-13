@@ -1,11 +1,13 @@
 import { createGlobalStyle } from "styled-components";
-import { Header } from "./components/layout/header";
-import { Main } from "./components/layout/main";
-import { About } from "./components/layout/about";
-import { Skills } from "./components/layout/skills";
-import { Footer } from "./components/layout/footer";
-import { Contact } from "./components/layout/contact";
-import { Projects } from "./components/layout/projects";
+import {
+  Header,
+  Main,
+  About,
+  Services,
+  Footer,
+  Contact,
+  Projects,
+} from "./components";
 
 function App() {
   return (
@@ -14,7 +16,7 @@ function App() {
       <Header />
       <Main />
       <About />
-      <Skills />
+      <Services />
       <Projects />
       <Contact />
       <Footer />
@@ -25,7 +27,7 @@ function App() {
 const GlobalStyle = createGlobalStyle`
 
 :root {
-  --primary-color: #121212;
+  --primary-color: #181818;
   --secondary-color: #222831;
   --tertiary-color: #008cff;
   --quaternary-color: #ffffff;
@@ -41,12 +43,13 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Sora", sans-serif;
+  font-family: "Epilogue", sans-serif;
   list-style: none;
 }
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -54,8 +57,15 @@ a {
 }
 
 body {
-  background-color: var(--primary-color);
+  background-color: #181818;
+  max-width: 192rem;
+  margin: 0 auto;
 }
+
+section,footer,header {
+  margin: 0 2rem;
+}
+
 
 /* scroll bar */
 ::-webkit-scrollbar {
