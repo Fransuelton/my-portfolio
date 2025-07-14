@@ -28,10 +28,10 @@ const ProjectCard = ({
         <ProjectDescription>{description}</ProjectDescription>
       </InfoContainer>
       <LinkContainer>
-        <a href={repositoryUrl}>
+        <a href={repositoryUrl} target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faGithub} /> Repositório
         </a>
-        <a href={deployUrl}>
+        <a href={deployUrl} target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faGlobe} />
           {buttonText}
         </a>
@@ -129,6 +129,12 @@ const LinkContainer = styled.div`
   align-items: flex-end;
   margin-top: auto;
 
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
   a {
     font-weight: 500;
     text-decoration: none;
@@ -140,6 +146,11 @@ const LinkContainer = styled.div`
     gap: 0.8rem;
     background-color: #181818;
     transition: 0.3s ease-in-out;
+
+    @media (max-width: 480px) {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   a:last-child {

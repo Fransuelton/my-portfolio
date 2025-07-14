@@ -15,6 +15,7 @@ import {
   SiVuedotjs,
   SiJavascript,
 } from "react-icons/si";
+import coverAuthJS from "../../../assets/images/cover-authjs.webp";
 
 const Projects = () => {
   return (
@@ -51,7 +52,7 @@ const Projects = () => {
           buttonText="Deploy"
         />
         <ProjectCard
-          image="../../../../src/assets/images/cover-authjs.webp"
+          image={coverAuthJS}
           name="AuthJS"
           description="Sistema de autenticação completo com Node.js, JWT, MongoDB e verificação de e-mail. Inclui login seguro, rotas protegidas e medidas contra ataques de força bruta."
           deployUrl="https://auth-js-gmtn.onrender.com"
