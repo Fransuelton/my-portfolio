@@ -161,6 +161,34 @@ const {
       console.log("%cFullstack Developer · Shopify · Node.js", "color:#71717a;");
       console.log("%cgithub.com/Fransuelton", "color:#00ff88;");
 
+      // Scrollspy
+      const siteHeader = document.getElementById("site-header");
+      if (siteHeader) {
+        const navLinks = Array.from(
+          siteHeader.querySelectorAll<HTMLAnchorElement>("nav a[href^='#']")
+        );
+        const sections = navLinks
+          .map((a) => document.getElementById(a.getAttribute("href")!.slice(1)))
+          .filter(Boolean) as HTMLElement[];
+
+        if (sections.length > 0) {
+          const updateSpy = () => {
+            const threshold = window.innerHeight * 0.45;
+            let current = "";
+            for (const section of sections) {
+              if (section.getBoundingClientRect().top <= threshold) {
+                current = section.id;
+              }
+            }
+            for (const link of navLinks) {
+              link.classList.toggle("is-active", link.getAttribute("href") === `#${current}`);
+            }
+          };
+          document.addEventListener("scroll", updateSpy, { passive: true });
+          updateSpy();
+        }
+      }
+
       // Scroll reveals
       const reveals = document.querySelectorAll<HTMLElement>(".reveal");
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
