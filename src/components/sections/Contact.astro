@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "../../i18n/utils";
 import type { Lang } from "../../i18n/utils";
+import ContactForm from "../islands/ContactForm";
 
 const lang = (Astro.currentLocale as Lang) ?? "pt";
 const t = useTranslations(lang);
@@ -92,35 +93,9 @@ const socialLinks = [
           </nav>
         </div>
 
-        <!-- Form side — Phase 4: ContactForm React island replaces this -->
-        <div id="contact-form-area" class="flex flex-col gap-3">
-          <input
-            type="text"
-            placeholder={t("contact.form.name")}
-            disabled
-            aria-label={t("contact.form.name")}
-            class="w-full px-4 py-3 rounded-xl bg-card border border-border text-text font-sans text-sm outline-none disabled:opacity-40 disabled:cursor-not-allowed"
-          />
-          <input
-            type="email"
-            placeholder={t("contact.form.email")}
-            disabled
-            aria-label={t("contact.form.email")}
-            class="w-full px-4 py-3 rounded-xl bg-card border border-border text-text font-sans text-sm outline-none disabled:opacity-40 disabled:cursor-not-allowed"
-          />
-          <textarea
-            placeholder={t("contact.form.message")}
-            rows={5}
-            disabled
-            aria-label={t("contact.form.message")}
-            class="w-full px-4 py-3 rounded-xl bg-card border border-border text-text font-sans text-sm outline-none resize-none disabled:opacity-40 disabled:cursor-not-allowed"
-          ></textarea>
-          <button
-            disabled
-            class="px-6 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            {t("contact.form.submit")}
-          </button>
+        <!-- Contact form island -->
+        <div id="contact-form-area">
+          <ContactForm client:load lang={lang} />
         </div>
       </div>
     </div>
