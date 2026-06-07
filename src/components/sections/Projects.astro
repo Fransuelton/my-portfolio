@@ -14,7 +14,7 @@ const projectsPath =
 <section id="projects" class="py-20 md:py-28">
   <div class="w-full max-w-5xl mx-auto px-4 sm:px-6">
     <!-- Heading -->
-    <div class="flex flex-wrap items-start justify-between gap-6 mb-12">
+    <div class="flex flex-wrap items-start justify-between gap-6 mb-12 reveal">
       <div>
         <p class="font-mono text-xs text-muted uppercase tracking-widest mb-3" aria-hidden="true">
           <span class="text-accent">$</span> {t("nav.projects").toLowerCase()}
@@ -35,7 +35,7 @@ const projectsPath =
     </div>
 
     <!-- Cards grid -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal" style="--i: 1">
       {
         featuredProjects.map((project) => (
           <ProjectCard

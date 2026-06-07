@@ -27,7 +27,7 @@ const stats = [
 
 <section id="about" class="py-20 md:py-28">
   <div class="w-full max-w-5xl mx-auto px-4 sm:px-6">
-    <div class="bg-surface border border-border rounded-2xl p-8 md:p-12">
+    <div class="bg-surface border border-border rounded-2xl p-8 md:p-12 reveal">
       <div class="flex flex-col md:flex-row gap-10 items-center md:items-start">
         <!-- Photo -->
         <div class="shrink-0">
@@ -78,7 +78,7 @@ const stats = [
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 border-t border-border">
             {stats.map(({ value, label }) => (
               <div class="flex flex-col gap-0.5">
-                <span class="font-mono font-bold text-accent text-xl sm:text-2xl leading-none">
+                <span class="font-mono font-bold text-text text-2xl sm:text-3xl leading-none">
                   {value}
                 </span>
                 <span class="text-muted text-xs leading-snug">{label}</span>

@@ -92,6 +92,17 @@ export const ui = {
     "lang.en":    "English",
     "lang.es":    "Español",
 
+    // Command palette
+    "cmd.open":        "Abrir paleta de comandos",
+    "cmd.placeholder": "Buscar comandos...",
+    "cmd.no-results":  "Nenhum resultado",
+    "cmd.group.nav":   "Navegação",
+    "cmd.group.pref":  "Preferências",
+    "cmd.group.lang":  "Idioma",
+    "cmd.hint.nav":    "navegar",
+    "cmd.hint.select": "selecionar",
+    "cmd.hint.close":  "fechar",
+
     // SEO
     "seo.title":       "Fransuelton Francisco — Desenvolvedor Fullstack",
     "seo.description": "Desenvolvedor Fullstack especializado em APIs, sistemas web e automações. Disponível para projetos freelance.",
@@ -180,6 +191,17 @@ export const ui = {
     "lang.en":    "English",
     "lang.es":    "Español",
 
+    // Command palette
+    "cmd.open":        "Open command palette",
+    "cmd.placeholder": "Search commands...",
+    "cmd.no-results":  "No results",
+    "cmd.group.nav":   "Navigation",
+    "cmd.group.pref":  "Preferences",
+    "cmd.group.lang":  "Language",
+    "cmd.hint.nav":    "navigate",
+    "cmd.hint.select": "select",
+    "cmd.hint.close":  "close",
+
     "seo.title":       "Fransuelton Francisco — Fullstack Developer",
     "seo.description": "Fullstack Developer specializing in APIs, web systems, and automation. Available for freelance projects.",
     "seo.projects.title": "Projects — Fransuelton Francisco",
@@ -266,6 +288,17 @@ export const ui = {
     "lang.pt":    "Português",
     "lang.en":    "English",
     "lang.es":    "Español",
+
+    // Command palette
+    "cmd.open":        "Abrir paleta de comandos",
+    "cmd.placeholder": "Buscar comandos...",
+    "cmd.no-results":  "Sin resultados",
+    "cmd.group.nav":   "Navegación",
+    "cmd.group.pref":  "Preferencias",
+    "cmd.group.lang":  "Idioma",
+    "cmd.hint.nav":    "navegar",
+    "cmd.hint.select": "seleccionar",
+    "cmd.hint.close":  "cerrar",
 
     "seo.title":       "Fransuelton Francisco — Desarrollador Fullstack",
     "seo.description": "Desarrollador Fullstack especializado en APIs, sistemas web y automatizaciones. Disponible para proyectos freelance.",
