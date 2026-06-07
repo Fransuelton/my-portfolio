@@ -29,6 +29,8 @@ const {
   alternates = [],
   ogImage = "https://fransuelton.dev/og-default.png",
 } = Astro.props;
+
+const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN as string | undefined;
 ---
 
 <!doctype html>
@@ -38,6 +40,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://avatars.githubusercontent.com" />
     <link rel="dns-prefetch" href="https://api.github.com" />
+    {cfToken && <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />}
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#080808" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
@@ -126,6 +129,15 @@ const {
 
     <!-- Per-page head extras (JSON-LD, extra meta, etc.) -->
     <slot name="head" />
+
+    <!-- Cloudflare Web Analytics — only injected when token is set (production) -->
+    {cfToken && (
+      <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token":"${cfToken}"}`}
+      />
+    )}
   </head>
   <body
     class="bg-bg text-text font-sans"
