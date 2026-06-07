@@ -1,6 +1,9 @@
+import type { APIRoute } from "astro";
 import { z } from "zod";
 
-interface Env {
+export const prerender = false;
+
+interface CloudflareEnv {
   RESEND_API_KEY: string;
   EMAIL_FROM: string;
   EMAIL_TO: string;
@@ -78,10 +81,7 @@ function confirmationHtml(name: string) {
 </div></body></html>`;
 }
 
-async function sendEmail(
-  apiKey: string,
-  payload: Record<string, unknown>
-): Promise<void> {
+async function sendEmail(apiKey: string, payload: Record<string, unknown>) {
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -96,19 +96,16 @@ async function sendEmail(
   }
 }
 
-export const onRequest = async ({
-  request,
-  env,
-}: {
-  request: Request;
-  env: Env;
-}) => {
-  if (request.method !== "POST")
-    return new Response("Method Not Allowed", { status: 405 });
+export const POST: APIRoute = async (context) => {
+  const env = context.locals.runtime?.env as CloudflareEnv | undefined;
+
+  if (!env?.RESEND_API_KEY) {
+    return json({ error: "Serviço de e-mail não configurado." }, 503);
+  }
 
   let raw: unknown;
   try {
-    raw = await request.json();
+    raw = await context.request.json();
   } catch {
     return json({ error: "Invalid JSON." }, 400);
   }
@@ -121,12 +118,10 @@ export const onRequest = async ({
 
   const { name, email, message, bot_field } = parsed.data;
 
-  // Honeypot — silently discard bots
   if (bot_field) return json({ ok: true });
 
   try {
     await Promise.all([
-      // Notification to you
       sendEmail(env.RESEND_API_KEY, {
         from: env.EMAIL_FROM,
         to: [env.EMAIL_TO],
@@ -134,7 +129,6 @@ export const onRequest = async ({
         subject: `[Portfolio] Nova mensagem de ${name}`,
         html: notificationHtml(name, email, message),
       }),
-      // Confirmation to the sender
       sendEmail(env.RESEND_API_KEY, {
         from: env.EMAIL_FROM,
         to: [email],
