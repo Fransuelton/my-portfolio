@@ -15,7 +15,7 @@ interface Props {
   lang: Lang;
 }
 
-const API_URL = (import.meta.env.PUBLIC_API_URL as string | undefined) ?? "http://localhost:3001";
+const API_URL = (import.meta.env.PUBLIC_API_URL as string | undefined) ?? "";
 
 export default function ContactForm({ lang }: Props) {
   const t = (key: string): string =>
