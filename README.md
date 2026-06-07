@@ -129,6 +129,9 @@ src/
 │       └── proyectos.astro
 └── styles/
     └── global.css     # Design tokens, animations, Tailwind config
+functions/
+└── api/
+    └── contact.ts     # Cloudflare Pages Function — contact form backend
 public/
 ├── manifest.webmanifest
 ├── favicon.ico
