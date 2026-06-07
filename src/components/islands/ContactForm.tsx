@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { ui } from "../../i18n/ui";
 
+declare global {
+  interface Window {
+    toast?: (message: string, type?: "success" | "error" | "info") => void;
+  }
+}
+
 type Lang = "pt" | "en" | "es";
-type Status = "idle" | "loading" | "success" | "error";
+type Status = "idle" | "loading";
 type FieldErrors = Partial<Record<"name" | "email" | "message", string>>;
 
 interface Props {
@@ -23,13 +29,12 @@ export default function ContactForm({ lang }: Props) {
   const [botField, setBotField] = useState("");
   const [status,   setStatus]   = useState<Status>("idle");
   const [errors,   setErrors]   = useState<FieldErrors>({});
-  const [apiError, setApiError] = useState("");
 
   const validate = (): boolean => {
     const errs: FieldErrors = {};
-    if (name.trim().length < 2)    errs.name    = "min 2 chars";
-    if (!/^\S+@\S+\.\S+$/.test(email)) errs.email = "invalid";
-    if (message.trim().length < 10) errs.message = "min 10 chars";
+    if (name.trim().length < 2)         errs.name    = "min 2 chars";
+    if (!/^\S+@\S+\.\S+$/.test(email))  errs.email   = "invalid";
+    if (message.trim().length < 10)     errs.message  = "min 10 chars";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -39,7 +44,6 @@ export default function ContactForm({ lang }: Props) {
     if (!validate()) return;
 
     setStatus("loading");
-    setApiError("");
 
     try {
       const res = await fetch(`${API_URL}/api/contact`, {
@@ -54,19 +58,20 @@ export default function ContactForm({ lang }: Props) {
       });
 
       if (res.ok) {
-        setStatus("success");
         setName(""); setEmail(""); setMessage("");
+        setStatus("idle");
+        window.toast?.(t("contact.form.success"), "success");
       } else if (res.status === 429) {
-        setApiError("Muitas tentativas. Aguarde 15 min.");
-        setStatus("error");
+        setStatus("idle");
+        window.toast?.("Muitas tentativas. Aguarde 15 min.", "error");
       } else {
         const body = await res.json().catch(() => ({}));
-        setApiError((body as { error?: string }).error ?? t("contact.form.error"));
-        setStatus("error");
+        setStatus("idle");
+        window.toast?.((body as { error?: string }).error ?? t("contact.form.error"), "error");
       }
     } catch {
-      setApiError(t("contact.form.error"));
-      setStatus("error");
+      setStatus("idle");
+      window.toast?.(t("contact.form.error"), "error");
     }
   };
 
@@ -76,23 +81,6 @@ export default function ContactForm({ lang }: Props) {
     (err
       ? "border-red-500/60 focus:border-red-400 focus:ring-1 focus:ring-red-400/20"
       : "border-border focus:border-accent focus:ring-1 focus:ring-accent/20");
-
-  if (status === "success") {
-    return (
-      <div className="flex flex-col items-center justify-center gap-4 py-10 text-center">
-        <div className="w-14 h-14 rounded-full flex items-center justify-center text-accent" style={{ background: "var(--accent-glow)" }}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <p className="font-mono font-semibold text-text">{t("contact.form.success")}</p>
-        <button
-          onClick={() => setStatus("idle")}
-          className="font-mono text-sm text-muted hover:text-accent transition-colors"
-        >
-          ← Enviar outra
-        </button>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
@@ -181,13 +169,6 @@ export default function ContactForm({ lang }: Props) {
           </span>
         </div>
       </div>
-
-      {/* API error */}
-      {status === "error" && apiError && (
-        <p role="alert" className="font-mono text-xs text-red-400">
-          ✗ {apiError}
-        </p>
-      )}
 
       {/* Submit */}
       <button
