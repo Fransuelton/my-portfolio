@@ -11,7 +11,7 @@ export const ui = {
 
     // Hero
     "hero.role":    "Desenvolvedor Fullstack",
-    "hero.roles":   "Desenvolvedor Fullstack,Desenvolvedor Back-End,Desenvolvedor Front-End,Criador de APIs",
+    "hero.roles":   "Desenvolvedor Fullstack,Desenvolvedor Back-End,Desenvolvedor Front-End",
     "hero.tagline": "Crio APIs, sistemas e interfaces web de alta performance.",
     "hero.cta.primary":   "Solicitar Orçamento",
     "hero.cta.secondary": "Ver Projetos",
@@ -118,7 +118,7 @@ export const ui = {
     "nav.quote":    "Request Quote",
 
     "hero.role":    "Fullstack Developer",
-    "hero.roles":   "Fullstack Developer,Back-End Developer,Front-End Developer,API Developer",
+    "hero.roles":   "Fullstack Developer,Back-End Developer,Front-End Developer",
     "hero.tagline": "I build high-performance APIs, systems, and web interfaces.",
     "hero.cta.primary":   "Request Quote",
     "hero.cta.secondary": "See Projects",
@@ -216,7 +216,7 @@ export const ui = {
     "nav.quote":    "Solicitar Presupuesto",
 
     "hero.role":    "Desarrollador Fullstack",
-    "hero.roles":   "Desarrollador Fullstack,Desarrollador Back-End,Desarrollador Front-End,Creador de APIs",
+    "hero.roles":   "Desarrollador Fullstack,Desarrollador Back-End,Desarrollador Front-End",
     "hero.tagline": "Creo APIs, sistemas e interfaces web de alto rendimiento.",
     "hero.cta.primary":   "Solicitar Presupuesto",
     "hero.cta.secondary": "Ver Proyectos",
