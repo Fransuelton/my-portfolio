@@ -1,0 +1,163 @@
+---
+import { useTranslations, getLocalePath } from "../../i18n/utils";
+import type { Lang } from "../../i18n/utils";
+
+const lang = (Astro.currentLocale as Lang) ?? "pt";
+const t = useTranslations(lang);
+
+const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=558499778995";
+
+const navLinks = [
+  { href: "#about",    label: t("nav.about") },
+  { href: "#services", label: t("nav.services") },
+  { href: "#projects", label: t("nav.projects") },
+  { href: "#contact",  label: t("nav.contact") },
+];
+---
+
+<header id="site-header" class="sticky top-3 z-40 px-4">
+  <div
+    class="max-w-5xl mx-auto rounded-2xl border border-border flex items-center justify-between px-4 py-3 backdrop-blur-md"
+    style="background: var(--header-bg);"
+  >
+    <!-- Logo -->
+    <a
+      href={getLocalePath(lang)}
+      aria-label="Fransuelton Francisco — Home"
+      class="shrink-0"
+    >
+      <img
+        src="/logo.svg"
+        alt="Logo"
+        width="44"
+        height="44"
+        class="transition-opacity hover:opacity-70"
+      />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-7" aria-label="Navegação principal">
+      {
+        navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class="font-mono text-sm text-muted hover:text-accent transition-colors"
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Right: CTA + placeholders + mobile toggle -->
+    <div class="flex items-center gap-2">
+      <!-- Phase 3: ThemeToggle island goes here -->
+      <!-- Phase 3: LanguageSelector island goes here -->
+
+      <!-- CTA — Phase 3: swap href for modal trigger -->
+      <a
+        href={WHATSAPP_URL}
+        id="briefing-cta"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg font-mono text-xs font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-colors"
+      >
+        {t("nav.quote")}
+      </a>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="menu-btn"
+        class="md:hidden p-2 rounded-lg border border-border text-muted hover:text-accent hover:border-accent transition-colors"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg
+          id="icon-open"
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg
+          id="icon-close"
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+          class="hidden"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <nav
+    id="mobile-menu"
+    class="hidden md:hidden max-w-5xl mx-auto mt-2 rounded-2xl border border-border p-4 flex flex-col gap-1"
+    style="background: var(--header-bg);"
+    aria-label="Navegação mobile"
+  >
+    {
+      navLinks.map(({ href, label }) => (
+        <a
+          href={href}
+          class="font-mono text-sm text-text hover:text-accent transition-colors py-2.5 px-2 rounded-lg hover:bg-card border border-transparent hover:border-border"
+        >
+          {label}
+        </a>
+      ))
+    }
+    <div class="mt-2 pt-2 border-t border-border">
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-colors"
+      >
+        {t("nav.quote")}
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById("menu-btn") as HTMLButtonElement | null;
+  const menu = document.getElementById("mobile-menu");
+  const iconOpen = document.getElementById("icon-open");
+  const iconClose = document.getElementById("icon-close");
+
+  btn?.addEventListener("click", () => {
+    const isOpen = !menu?.classList.contains("hidden");
+    menu?.classList.toggle("hidden", isOpen);
+    iconOpen?.classList.toggle("hidden", !isOpen);
+    iconClose?.classList.toggle("hidden", isOpen);
+    btn.setAttribute("aria-expanded", String(!isOpen));
+  });
+
+  // Close drawer when an anchor link is clicked
+  menu?.querySelectorAll("a[href^='#']").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.classList.add("hidden");
+      iconOpen?.classList.remove("hidden");
+      iconClose?.classList.add("hidden");
+      btn?.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>

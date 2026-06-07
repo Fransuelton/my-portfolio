@@ -1,0 +1,93 @@
+---
+import "../styles/global.css";
+import type { Lang } from "../i18n/utils";
+
+export interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  /** Canonical URL for this page */
+  canonicalUrl?: string;
+  /**
+   * hreflang alternates: each entry is { lang: BCP-47, url: absolute URL }.
+   * Pass all language variants including x-default.
+   */
+  alternates?: Array<{ lang: string; url: string }>;
+  /** OG image absolute URL */
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  lang,
+  canonicalUrl,
+  alternates = [],
+  ogImage = "https://fransuelton.dev/og-default.png",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang === "pt" ? "pt-BR" : lang === "en" ? "en-US" : "es-ES"}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      Anti-FOUC: runs synchronously before the first paint.
+      Reads localStorage → falls back to system preference.
+      Sets data-theme on <html> so CSS variables are correct immediately.
+    -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var theme =
+            stored === "dark" || stored === "light"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (_) {}
+      })();
+    </script>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <!-- hreflang -->
+    {
+      alternates.map(({ lang: l, url }) => (
+        <link rel="alternate" hreflang={l} href={url} />
+      ))
+    }
+    {
+      alternates.length > 0 && (
+        <link rel="alternate" hreflang="x-default" href={alternates[0]?.url} />
+      )
+    }
+
+    <!-- OG / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+
+    <!-- Per-page head extras (JSON-LD, extra meta, etc.) -->
+    <slot name="head" />
+  </head>
+  <body class="bg-bg text-text font-sans">
+    <slot />
+  </body>
+</html>

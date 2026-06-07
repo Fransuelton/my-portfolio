@@ -1,0 +1,95 @@
+---
+import { useTranslations } from "../../i18n/utils";
+import type { Lang } from "../../i18n/utils";
+
+const lang = (Astro.currentLocale as Lang) ?? "pt";
+const t = useTranslations(lang);
+
+const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=558499778995";
+---
+
+<section id="hero" class="min-h-screen flex items-center">
+  <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 py-28">
+    <div class="max-w-2xl">
+      <!-- Terminal prompt -->
+      <p class="font-mono text-muted text-sm mb-8 flex items-center gap-2" aria-hidden="true">
+        <span class="text-accent text-base">›</span>
+        <span>~</span>
+        <span class="text-muted/50">/fransuelton.dev</span>
+      </p>
+
+      <!-- Name -->
+      <h1 class="font-mono font-bold leading-tight mb-4">
+        <span class="text-text text-5xl sm:text-6xl md:text-7xl block">Fransuelton</span>
+        <span class="text-accent text-5xl sm:text-6xl md:text-7xl block">Francisco</span>
+      </h1>
+
+      <!-- Role with typewriter -->
+      <p
+        class="font-mono text-muted text-xl sm:text-2xl mb-6 typewriter"
+        aria-label={t("hero.role")}
+      >
+        {t("hero.role")}
+      </p>
+
+      <!-- Tagline -->
+      <p class="text-muted text-base sm:text-lg leading-relaxed mb-10 max-w-lg border-l-2 border-accent/40 pl-4">
+        {t("hero.tagline")}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-4">
+        <a
+          href={WHATSAPP_URL}
+          id="briefing-cta"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-all duration-200 hover:-translate-y-0.5"
+        >
+          {t("hero.cta.primary")}
+        </a>
+        <a
+          href="#projects"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-mono text-sm font-medium border border-border text-text hover:border-accent hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
+        >
+          {t("hero.cta.secondary")}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes typing {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50%      { border-color: var(--accent); }
+  }
+
+  .typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0.1em solid transparent;
+    display: inline-block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .typewriter {
+      animation:
+        typing 2.5s steps(28, end) 0.4s both,
+        blink-caret 0.75s step-end 2.9s infinite;
+    }
+  }
+
+  /* Ensure cursor is visible when animation is done */
+  @media (prefers-reduced-motion: reduce) {
+    .typewriter {
+      border-right: none;
+    }
+  }
+</style>
