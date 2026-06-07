@@ -34,9 +34,13 @@ export const ui = {
     // Projects
     "projects.title":    "Projetos em Destaque",
     "projects.subtitle": "Meus principais projetos Frontend, Backend e Fullstack.",
-    "projects.more":     "Ver mais projetos",
-    "projects.repo":     "Repositório",
-    "projects.demo":     "Demo",
+    "projects.more":          "Ver mais projetos",
+    "projects.repo":          "Repositório",
+    "projects.demo":          "Demo",
+    "projects.page.subtitle": "Repositórios open-source no GitHub, excluindo os projetos em destaque.",
+    "projects.page.repos":    "repositórios públicos",
+    "projects.page.empty":    "Não foi possível carregar os repositórios. Confira no GitHub.",
+    "projects.page.back":     "← Página inicial",
 
     // Contact
     "contact.title":       "Vamos Conversar?",
@@ -117,9 +121,13 @@ export const ui = {
 
     "projects.title":    "Featured Projects",
     "projects.subtitle": "My main Frontend, Backend, and Fullstack projects.",
-    "projects.more":     "See more projects",
-    "projects.repo":     "Repository",
-    "projects.demo":     "Demo",
+    "projects.more":          "See more projects",
+    "projects.repo":          "Repository",
+    "projects.demo":          "Demo",
+    "projects.page.subtitle": "Open-source repositories on GitHub, excluding featured projects.",
+    "projects.page.repos":    "public repositories",
+    "projects.page.empty":    "Could not load repositories. Check GitHub directly.",
+    "projects.page.back":     "← Home",
 
     "contact.title":       "Let's Talk?",
     "contact.description": "I'm always open to new opportunities, collaborations, and interesting challenges. Send me an email",
@@ -194,9 +202,13 @@ export const ui = {
 
     "projects.title":    "Proyectos Destacados",
     "projects.subtitle": "Mis principales proyectos Frontend, Backend y Fullstack.",
-    "projects.more":     "Ver más proyectos",
-    "projects.repo":     "Repositorio",
-    "projects.demo":     "Demo",
+    "projects.more":          "Ver más proyectos",
+    "projects.repo":          "Repositorio",
+    "projects.demo":          "Demo",
+    "projects.page.subtitle": "Repositorios open-source en GitHub, excluyendo los proyectos destacados.",
+    "projects.page.repos":    "repositorios públicos",
+    "projects.page.empty":    "No se pudieron cargar los repositorios. Consulta GitHub directamente.",
+    "projects.page.back":     "← Inicio",
 
     "contact.title":       "¿Hablamos?",
     "contact.description": "Siempre estoy abierto a nuevas oportunidades, colaboraciones y desafíos interesantes. Envíame un email",
