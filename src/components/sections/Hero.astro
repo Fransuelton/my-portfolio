@@ -1,0 +1,182 @@
+---
+import { useTranslations } from "../../i18n/utils";
+import type { Lang } from "../../i18n/utils";
+
+const lang = (Astro.currentLocale as Lang) ?? "pt";
+const t = useTranslations(lang);
+
+const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=558499778995";
+const roles = t("hero.roles").split(",");
+---
+
+<section id="hero" class="relative min-h-screen flex items-center overflow-hidden">
+  <!-- Dot grid background -->
+  <div class="hero-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 py-28">
+    <div class="max-w-2xl">
+      <!-- Terminal prompt -->
+      <p
+        class="hero-item font-mono text-muted text-sm mb-8 flex items-center gap-2"
+        style="--delay: 100ms"
+        aria-hidden="true"
+      >
+        <span class="text-accent text-base">›</span>
+        <span>~</span>
+        <span class="text-muted/50">/fransuelton.dev</span>
+      </p>
+
+      <!-- Name -->
+      <h1 class="hero-item font-mono font-bold leading-[0.95] tracking-tight mb-4" style="--delay: 200ms">
+        <span class="text-text text-5xl sm:text-6xl md:text-7xl block" data-scramble>Fransuelton</span>
+        <span class="text-accent text-5xl sm:text-6xl md:text-7xl block" data-scramble>Francisco</span>
+      </h1>
+
+      <!-- Role — typewriter loop (JS-driven) -->
+      <p
+        id="hero-role"
+        class="hero-item font-mono text-muted text-xl sm:text-2xl mb-6 tw-loop"
+        style="--delay: 360ms"
+        aria-label={roles[0]}
+        data-roles={JSON.stringify(roles)}
+      >
+        {roles[0]}
+      </p>
+
+      <!-- Tagline -->
+      <p
+        class="hero-item text-muted text-base sm:text-lg leading-relaxed mb-10 max-w-lg border-l-2 border-accent/40 pl-4"
+        style="--delay: 460ms"
+      >
+        {t("hero.tagline")}
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-item flex flex-wrap gap-4" style="--delay: 560ms">
+        <a
+          href={WHATSAPP_URL}
+          data-briefing-trigger
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-all duration-200 hover:-translate-y-0.5"
+        >
+          {t("hero.cta.primary")}
+        </a>
+        <a
+          href="#projects"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-mono text-sm font-medium border border-border text-text hover:border-accent hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
+        >
+          {t("hero.cta.secondary")}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-bg {
+    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: linear-gradient(180deg, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+
+  /* Block cursor */
+  .tw-loop::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 0.88em;
+    background: var(--accent);
+    margin-left: 3px;
+    vertical-align: -0.06em;
+    animation: tw-blink 0.75s step-end infinite;
+  }
+
+  @keyframes tw-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tw-loop::after { animation: none; }
+  }
+</style>
+
+<!-- Typewriter loop -->
+<script>
+  (function () {
+    const el = document.getElementById("hero-role") as HTMLElement | null;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const roles: string[] = JSON.parse(el.dataset.roles ?? "[]");
+    if (roles.length < 2) return;
+
+    const TYPING_MS  = 85;
+    const DELETE_MS  = 42;
+    const PAUSE_FULL = 1800;
+    const PAUSE_NEXT = 350;
+
+    let idx = 0, chars = roles[0].length, deleting = true;
+
+    function tick() {
+      if (deleting) {
+        chars--;
+        el.textContent = roles[idx].slice(0, chars);
+        if (chars === 0) { deleting = false; idx = (idx + 1) % roles.length; setTimeout(tick, PAUSE_NEXT); }
+        else setTimeout(tick, DELETE_MS);
+      } else {
+        const role = roles[idx]; chars++;
+        el.textContent = role.slice(0, chars);
+        if (chars === role.length) { el.setAttribute("aria-label", role); deleting = true; setTimeout(tick, PAUSE_FULL); }
+        else setTimeout(tick, TYPING_MS);
+      }
+    }
+    setTimeout(tick, PAUSE_FULL);
+  })();
+</script>
+
+<!-- Name scramble -->
+<script>
+  (function () {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$!";
+    const FRAME_MS = 40;
+    const INITIAL_FRAMES = 3;
+    const LOCK_EVERY = 2;
+
+    function scramble(el: HTMLElement) {
+      const target = el.textContent ?? "";
+      const len = target.length;
+      let frame = 0;
+
+      const tick = () => {
+        const locked = frame <= INITIAL_FRAMES
+          ? 0
+          : Math.min(len, Math.floor((frame - INITIAL_FRAMES) / LOCK_EVERY));
+
+        let out = "";
+        for (let i = 0; i < len; i++) {
+          if (target[i] === " ") { out += " "; continue; }
+          out += i < locked
+            ? target[i]
+            : CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+        el.textContent = out;
+
+        if (locked < len) { frame++; setTimeout(tick, FRAME_MS); }
+        else { el.textContent = target; }
+      };
+
+      tick();
+    }
+
+    // Align with H1 animation-delay (200ms)
+    setTimeout(() => {
+      document.querySelectorAll<HTMLElement>("[data-scramble]").forEach(scramble);
+    }, 220);
+  })();
+</script>

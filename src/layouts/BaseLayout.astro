@@ -1,0 +1,274 @@
+---
+import "../styles/global.css";
+import Header from "../components/ui/Header.astro";
+import Footer from "../components/ui/Footer.astro";
+import BriefingModal from "../components/islands/BriefingModal";
+import CommandPalette from "../components/islands/CommandPalette";
+import type { Lang } from "../i18n/utils";
+
+export interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  /** Canonical URL for this page */
+  canonicalUrl?: string;
+  /**
+   * hreflang alternates: each entry is { lang: BCP-47, url: absolute URL }.
+   * Pass all language variants including x-default.
+   */
+  alternates?: Array<{ lang: string; url: string }>;
+  /** OG image absolute URL */
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  lang,
+  canonicalUrl,
+  alternates = [],
+  ogImage = "https://fransuelton.dev/og-default.png",
+} = Astro.props;
+
+const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN as string | undefined;
+---
+
+<!doctype html>
+<html lang={lang === "pt" ? "pt-BR" : lang === "en" ? "en-US" : "es-ES"}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://avatars.githubusercontent.com" />
+    <link rel="dns-prefetch" href="https://api.github.com" />
+    {cfToken && <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />}
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#080808" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+
+    <!--
+      Anti-FOUC: runs synchronously before the first paint.
+      Reads localStorage → falls back to system preference.
+      Sets data-theme on <html> so CSS variables are correct immediately.
+    -->
+    <script is:inline>
+      (function () {
+        try {
+          document.documentElement.classList.add("js-ready");
+          var stored = localStorage.getItem("theme");
+          var theme =
+            stored === "dark" || stored === "light"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (_) {}
+      })();
+    </script>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <!-- hreflang -->
+    {
+      alternates.map(({ lang: l, url }) => (
+        <link rel="alternate" hreflang={l} href={url} />
+      ))
+    }
+    {
+      alternates.length > 0 && (
+        <link rel="alternate" hreflang="x-default" href={alternates[0]?.url} />
+      )
+    }
+
+    <!-- OG / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+
+    <!-- Structured data (Person + WebSite) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify([
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Fransuelton Francisco",
+          url: "https://fransuelton.dev",
+          jobTitle:
+            lang === "en"
+              ? "Fullstack Developer"
+              : lang === "es"
+                ? "Desarrollador Fullstack"
+                : "Desenvolvedor Fullstack",
+          image: "https://avatars.githubusercontent.com/u/107893416?v=4",
+          sameAs: [
+            "https://github.com/Fransuelton",
+            "https://linkedin.com/in/fransuelton",
+          ],
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Fransuelton Francisco",
+          url: "https://fransuelton.dev",
+        },
+      ])}
+    />
+
+    <!-- Per-page head extras (JSON-LD, extra meta, etc.) -->
+    <slot name="head" />
+
+    <!-- Cloudflare Web Analytics — only injected when token is set (production) -->
+    {cfToken && (
+      <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token":"${cfToken}"}`}
+      />
+    )}
+  </head>
+  <body
+    class="bg-bg text-text font-sans"
+    data-lang={lang}
+    data-alternates={JSON.stringify(alternates)}
+  >
+    <!-- Scroll progress indicator -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Skip navigation: first focusable element on every page -->
+    <a href="#main-content" class="skip-link">
+      {lang === "en" ? "Skip to main content" : lang === "es" ? "Ir al contenido principal" : "Ir ao conteúdo principal"}
+    </a>
+    <Header />
+    <slot />
+    <Footer />
+    <BriefingModal client:load />
+    <CommandPalette client:load />
+
+    <script>
+      import { initToast } from "../lib/toast";
+      initToast();
+
+      // Scroll progress bar
+      const bar = document.getElementById("scroll-progress");
+      if (bar) {
+        const updateBar = () => {
+          const d = document.documentElement;
+          const pct = Math.max(0, Math.min(1, d.scrollTop / (d.scrollHeight - d.clientHeight) || 0));
+          bar.style.transform = `scaleX(${pct})`;
+        };
+        document.addEventListener("scroll", updateBar, { passive: true });
+      }
+
+      // Spotlight cursor on cards
+      document.addEventListener("mousemove", (e) => {
+        const card = (e.target as Element).closest<HTMLElement>(".card-spotlight");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+      }, { passive: true });
+
+      // Easter egg
+      console.log(
+        "%c Fransuelton Francisco %c",
+        "background:#00ff88;color:#080808;font-weight:700;padding:3px 8px;border-radius:4px;",
+        ""
+      );
+      console.log("%cFullstack Developer · Shopify · Node.js", "color:#71717a;");
+      console.log("%cgithub.com/Fransuelton", "color:#00ff88;");
+
+      // Scrollspy
+      const siteHeader = document.getElementById("site-header");
+      if (siteHeader) {
+        const navLinks = Array.from(
+          siteHeader.querySelectorAll<HTMLAnchorElement>("nav a[href^='#']")
+        );
+        const sections = navLinks
+          .map((a) => document.getElementById(a.getAttribute("href")!.slice(1)))
+          .filter(Boolean) as HTMLElement[];
+
+        if (sections.length > 0) {
+          const updateSpy = () => {
+            const threshold = window.innerHeight * 0.45;
+            let current = "";
+            for (const section of sections) {
+              if (section.getBoundingClientRect().top <= threshold) {
+                current = section.id;
+              }
+            }
+            for (const link of navLinks) {
+              link.classList.toggle("is-active", link.getAttribute("href") === `#${current}`);
+            }
+          };
+          document.addEventListener("scroll", updateSpy, { passive: true });
+          updateSpy();
+        }
+      }
+
+      // Scroll reveals
+      const reveals = document.querySelectorAll<HTMLElement>(".reveal");
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        reveals.forEach((el) => el.classList.add("is-visible"));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+        );
+        reveals.forEach((el) => observer.observe(el));
+      }
+
+      // Count-up animations
+      const countupEls = document.querySelectorAll<HTMLElement>("[data-countup]");
+      if (countupEls.length > 0 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const animateCount = (el: HTMLElement) => {
+          const raw = el.dataset.countup ?? "";
+          const m = raw.match(/^([+]?)(\d+)(%?)$/);
+          if (!m) return;
+          const [, prefix, numStr, suffix] = m;
+          const end = parseInt(numStr, 10);
+          const dur = 1200;
+          const started = performance.now();
+          const tick = (now: number) => {
+            const p = Math.min(1, (now - started) / dur);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = `${prefix}${Math.round(eased * end)}${suffix}`;
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        };
+        const countObs = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                animateCount(entry.target as HTMLElement);
+                countObs.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.5 }
+        );
+        countupEls.forEach((el) => countObs.observe(el));
+      }
+    </script>
+  </body>
+</html>

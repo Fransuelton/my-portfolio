@@ -1,0 +1,334 @@
+/* ── Self-hosted variable fonts (fontsource) ─────────────── */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+@import "tailwindcss";
+
+/* ── Tailwind v4 static tokens ──────────────────────────── */
+@theme {
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", monospace;
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+}
+
+/* Dynamic: stay as var() refs so they update with [data-theme] */
+@theme inline {
+  --color-bg:         var(--bg);
+  --color-surface:    var(--surface);
+  --color-card:       var(--card);
+  --color-text:       var(--text);
+  --color-muted:      var(--muted);
+  --color-accent:     var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-border:     var(--border);
+}
+
+/* ── Theme tokens ──────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --bg:          #080808;
+  --surface:     #0e0e0e;
+  --card:        #141414;
+  --text:        #e4e4e7;
+  --muted:       #71717a;
+  --accent:      #00ff88;
+  --accent-dim:  #00cc6a;
+  --accent-glow: rgba(0, 255, 136, 0.12);
+  --border:      rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.13);
+  --header-bg:   rgba(8, 8, 8, 0.85);
+  --dot-color:   rgba(255, 255, 255, 0.08);
+
+  --card-shadow:  0 1px 2px rgba(0, 0, 0, 0.6),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  --hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.65),
+                  0 2px 8px rgba(0, 0, 0, 0.4);
+
+  --selection-bg:   rgba(0, 255, 136, 0.22);
+  --selection-text: #ffffff;
+}
+
+[data-theme="light"] {
+  --dot-color: rgba(0, 0, 0, 0.06);
+  --bg:          #fafafa;
+  --surface:     #ffffff;
+  --card:        #f4f4f5;
+  --text:        #18181b;
+  --muted:       #71717a;
+  --accent:      #059669;
+  --accent-dim:  #047857;
+  --accent-glow: rgba(5, 150, 105, 0.10);
+  --border:      rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --header-bg:   rgba(250, 250, 250, 0.88);
+
+  --card-shadow:  0 1px 3px rgba(0, 0, 0, 0.07),
+                  0 1px 2px rgba(0, 0, 0, 0.04);
+  --hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.11),
+                  0 2px 8px rgba(0, 0, 0, 0.06);
+
+  --selection-bg:   rgba(5, 150, 105, 0.18);
+  --selection-text: #18181b;
+}
+
+/* ── Base resets ───────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Display headings: tighter tracking for mono at large sizes */
+  h1 { letter-spacing: -0.025em; }
+  h2 { letter-spacing: -0.015em; }
+
+  /* Custom text selection */
+  ::selection {
+    background: var(--selection-bg);
+    color: var(--selection-text);
+  }
+
+  /* Global keyboard focus ring */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* Custom scrollbar — Webkit */
+  ::-webkit-scrollbar          { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track    { background: transparent; }
+  ::-webkit-scrollbar-thumb    { background: var(--border-strong); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+  /* Firefox */
+  * { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ── Hero entrance animation ─────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-item {
+    animation: hero-enter 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--delay, 0ms);
+  }
+}
+
+/* ── Scroll progress bar ─────────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 48;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-dim));
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ── Scroll reveal ───────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .js-ready .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  .js-ready .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Cross-document View Transitions (Chrome 126+) ─────── */
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes vt-out { to   { opacity: 0; } }
+  @keyframes vt-in  { from { opacity: 0; } }
+
+  ::view-transition-old(root) { animation: vt-out 0.15s ease-out both; }
+  ::view-transition-new(root) { animation: vt-in  0.20s ease-in  both; }
+}
+
+/* ── Scrollspy active nav link ───────────────────────────── */
+a.is-active {
+  color: var(--accent) !important;
+}
+
+/* ── Command Palette ─────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes palette-backdrop-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes palette-panel-in {
+    from { opacity: 0; transform: scale(0.97) translateY(-6px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .palette-backdrop { animation: palette-backdrop-in 0.15s ease both; }
+  .palette-panel    { animation: palette-panel-in    0.15s cubic-bezier(0.16, 1, 0.3, 1) both; }
+}
+
+/* ── Toast notifications ─────────────────────────────────── */
+#toast-region {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1rem;
+  z-index: 9900;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.5rem;
+  pointer-events: none;
+  width: min(22rem, calc(100vw - 2rem));
+}
+
+.toast-item {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  box-shadow: var(--hover-shadow);
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease,
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-item.toast-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Skip navigation link ──────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  left: -100vw;
+  top: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1.25rem;
+  background: var(--accent);
+  color: #0a0a0a;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: none;
+}
+
+.skip-link:focus {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ── Spotlight cursor on cards ───────────────────────────── */
+.card-spotlight {
+  position: relative;
+}
+
+.card-spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    500px circle at var(--mouse-x, -200%) var(--mouse-y, -200%),
+    var(--accent-glow),
+    transparent 40%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.card-spotlight:hover::before {
+  opacity: 1;
+}
+
+/* ── Print ───────────────────────────────────────────────── */
+@media print {
+  :root,
+  [data-theme="dark"],
+  [data-theme="light"] {
+    --bg:            #ffffff;
+    --surface:       #f9f9f9;
+    --card:          #f4f4f5;
+    --text:          #18181b;
+    --muted:         #52525b;
+    --border:        rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.20);
+    --accent:        #059669;
+    --accent-glow:   rgba(5, 150, 105, 0.10);
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  #site-header,
+  footer,
+  #scroll-progress,
+  #toast-region,
+  .skip-link { display: none !important; }
+
+  section { break-inside: avoid; }
+  article  { break-inside: avoid; }
+  .max-w-5xl { max-width: 100% !important; }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.65em;
+    color: var(--muted);
+    word-break: break-all;
+  }
+  a[aria-label]::after,
+  a[data-briefing-trigger]::after { content: none !important; }
+}

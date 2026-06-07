@@ -1,0 +1,82 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RepoCard from "../components/ui/RepoCard.astro";
+import { useTranslations, getAlternateUrls, getLocalePath } from "../i18n/utils";
+import { fetchPortfolioRepos } from "../lib/github";
+
+const lang = "pt";
+const t = useTranslations(lang);
+const site = "https://fransuelton.dev";
+
+const alternates = getAlternateUrls(site, {
+  pt: "/projetos/",
+  en: "/en/projects/",
+  es: "/es/proyectos/",
+});
+
+const repos = await fetchPortfolioRepos();
+---
+
+<BaseLayout
+  title={t("seo.projects.title")}
+  description={t("seo.projects.description")}
+  lang={lang}
+  canonicalUrl={`${site}/projetos/`}
+  alternates={alternates}
+>
+  <main id="main-content" tabindex="-1" class="min-h-screen py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <!-- Heading -->
+      <div class="mb-12">
+        <p class="font-mono text-xs text-muted uppercase tracking-widest mb-3" aria-hidden="true">
+          <span class="text-accent">$</span> ls ~/projetos
+        </p>
+        <h1 class="font-mono font-bold text-text text-3xl md:text-4xl mb-3">
+          Projetos
+        </h1>
+        <p class="text-muted text-sm mb-2">{t("projects.page.subtitle")}</p>
+        {repos.length > 0 && (
+          <p class="font-mono text-xs text-accent">
+            {repos.length} {t("projects.page.repos")}
+          </p>
+        )}
+      </div>
+
+      <!-- Grid -->
+      {repos.length > 0 ? (
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {repos.map((repo) => (
+            <RepoCard
+              {...repo}
+              lang={lang}
+              repoLabel={t("projects.repo")}
+              demoLabel={t("projects.demo")}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="flex flex-col items-center gap-4 py-20 text-center">
+          <p class="text-muted">{t("projects.page.empty")}</p>
+          <a
+            href="https://github.com/Fransuelton"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono text-sm text-accent hover:text-accent-dim transition-colors"
+          >
+            github.com/Fransuelton →
+          </a>
+        </div>
+      )}
+
+      <!-- Back link -->
+      <div class="mt-16 pt-8 border-t border-border">
+        <a
+          href={getLocalePath(lang)}
+          class="font-mono text-sm text-muted hover:text-accent transition-colors"
+        >
+          {t("projects.page.back")}
+        </a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

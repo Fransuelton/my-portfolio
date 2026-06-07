@@ -1,0 +1,36 @@
+---
+import { useTranslations } from "../../i18n/utils";
+import type { Lang } from "../../i18n/utils";
+
+const lang = (Astro.currentLocale as Lang) ?? "pt";
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border mt-8">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 flex items-center justify-between gap-4 flex-wrap">
+    <p class="font-mono text-sm text-muted">
+      © {year} Fransuelton.{" "}
+      <span class="text-muted/60">{t("footer.rights")}</span>
+    </p>
+
+    <a
+      href="#hero"
+      aria-label={t("footer.back-top")}
+      class="flex items-center justify-center w-9 h-9 rounded-lg bg-card border border-border text-muted hover:text-accent hover:border-accent transition-colors"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <polyline points="18 15 12 9 6 15"/>
+      </svg>
+    </a>
+  </div>
+</footer>

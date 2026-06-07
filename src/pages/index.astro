@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/sections/Hero.astro";
+import About from "../components/sections/About.astro";
+import Services from "../components/sections/Services.astro";
+import Projects from "../components/sections/Projects.astro";
+import Contact from "../components/sections/Contact.astro";
+import { useTranslations, getAlternateUrls } from "../i18n/utils";
+
+const lang = "pt";
+const t = useTranslations(lang);
+const site = "https://fransuelton.dev";
+
+const alternates = getAlternateUrls(site, {
+  pt: "/",
+  en: "/en/",
+  es: "/es/",
+});
+---
+
+<BaseLayout
+  title={t("seo.title")}
+  description={t("seo.description")}
+  lang={lang}
+  canonicalUrl={`${site}/`}
+  alternates={alternates}
+>
+  <main id="main-content" tabindex="-1">
+    <Hero />
+    <About />
+    <Services />
+    <Projects />
+    <Contact />
+  </main>
+</BaseLayout>
