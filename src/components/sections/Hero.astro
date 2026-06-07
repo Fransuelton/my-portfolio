@@ -6,6 +6,7 @@ const lang = (Astro.currentLocale as Lang) ?? "pt";
 const t = useTranslations(lang);
 
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=558499778995";
+const roles = t("hero.roles").split(",");
 ---
 
 <section id="hero" class="min-h-screen flex items-center">
@@ -24,12 +25,14 @@ const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=558499778995";
         <span class="text-accent text-5xl sm:text-6xl md:text-7xl block">Francisco</span>
       </h1>
 
-      <!-- Role with typewriter -->
+      <!-- Role — typewriter loop (JS-driven) -->
       <p
-        class="font-mono text-muted text-xl sm:text-2xl mb-6 typewriter"
-        aria-label={t("hero.role")}
+        id="hero-role"
+        class="font-mono text-muted text-xl sm:text-2xl mb-6 tw-loop"
+        aria-label={roles[0]}
+        data-roles={JSON.stringify(roles)}
       >
-        {t("hero.role")}
+        {roles[0]}
       </p>
 
       <!-- Tagline -->
@@ -61,35 +64,74 @@ const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=558499778995";
 </section>
 
 <style>
-  @keyframes typing {
-    from { width: 0; }
-    to   { width: 100%; }
-  }
-
-  @keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50%      { border-color: var(--accent); }
-  }
-
-  .typewriter {
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 0.1em solid transparent;
+  /* Block cursor always visible */
+  .tw-loop::after {
+    content: "";
     display: inline-block;
+    width: 2px;
+    height: 0.88em;
+    background: var(--accent);
+    margin-left: 3px;
+    vertical-align: -0.06em;
+    animation: tw-blink 0.75s step-end infinite;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .typewriter {
-      animation:
-        typing 2.5s steps(28, end) 0.4s both,
-        blink-caret 0.75s step-end 2.9s infinite;
-    }
+  @keyframes tw-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
   }
 
-  /* Ensure cursor is visible when animation is done */
   @media (prefers-reduced-motion: reduce) {
-    .typewriter {
-      border-right: none;
-    }
+    .tw-loop::after { animation: none; }
   }
 </style>
+
+<script>
+  (function () {
+    const el = document.getElementById("hero-role") as HTMLElement | null;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const roles: string[] = JSON.parse(el.dataset.roles ?? "[]");
+    if (roles.length < 2) return;
+
+    const TYPING_MS  = 85;
+    const DELETE_MS  = 42;
+    const PAUSE_FULL = 1800;
+    const PAUSE_NEXT = 350;
+
+    let idx      = 0;
+    let chars    = roles[0].length;
+    let deleting = true;
+
+    function tick() {
+      if (deleting) {
+        chars--;
+        el.textContent = roles[idx].slice(0, chars);
+
+        if (chars === 0) {
+          deleting = false;
+          idx = (idx + 1) % roles.length;
+          setTimeout(tick, PAUSE_NEXT);
+        } else {
+          setTimeout(tick, DELETE_MS);
+        }
+      } else {
+        const role = roles[idx];
+        chars++;
+        el.textContent = role.slice(0, chars);
+
+        if (chars === role.length) {
+          el.setAttribute("aria-label", role);
+          deleting = true;
+          setTimeout(tick, PAUSE_FULL);
+        } else {
+          setTimeout(tick, TYPING_MS);
+        }
+      }
+    }
+
+    setTimeout(tick, PAUSE_FULL);
+  })();
+</script>
