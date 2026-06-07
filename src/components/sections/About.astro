@@ -10,8 +10,18 @@ const CV_URL =
 const AVATAR_URL = "https://avatars.githubusercontent.com/u/107893416?v=4";
 
 const stack = [
-  "JavaScript", "TypeScript", "React", "Node.js",
-  "MySQL", "MongoDB", "Git", "Linux",
+  "Shopify", "Liquid", "React", "Node.js",
+  "MySQL", "TypeScript", "Vue.js",
+  "JavaScript", "MongoDB", "Git",
+];
+const VISIBLE = 7;
+const overflow = stack.length - VISIBLE;
+
+const stats = [
+  { value: "+3",   label: t("about.stat.years") },
+  { value: "+90",  label: t("about.stat.projects") },
+  { value: "+5",   label: t("about.stat.clients") },
+  { value: "100%", label: t("about.stat.focus") },
 ];
 ---
 
@@ -23,7 +33,7 @@ const stack = [
         <div class="shrink-0">
           <img
             src={AVATAR_URL}
-            alt="Foto de Fransuelton Francisco, Desenvolvedor Fullstack"
+            alt={t("about.photo.alt")}
             width="192"
             height="192"
             loading="lazy"
@@ -49,13 +59,31 @@ const stack = [
 
           <!-- Stack badges -->
           <div class="flex flex-wrap gap-2" aria-label="Tech stack">
-            {
-              stack.map((item) => (
-                <span class="font-mono text-xs px-2.5 py-1 rounded-lg bg-card border border-border text-muted hover:border-accent hover:text-accent transition-colors cursor-default">
-                  {item}
+            {stack.slice(0, VISIBLE).map((item) => (
+              <span class="font-mono text-xs px-2.5 py-1 rounded-lg bg-card border border-border text-muted hover:border-accent hover:text-accent transition-colors cursor-default">
+                {item}
+              </span>
+            ))}
+            {overflow > 0 && (
+              <span
+                class="font-mono text-xs px-2.5 py-1 rounded-lg bg-card border border-border text-accent cursor-default"
+                title={stack.slice(VISIBLE).join(", ")}
+              >
+                +{overflow}
+              </span>
+            )}
+          </div>
+
+          <!-- Stats grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 border-t border-border">
+            {stats.map(({ value, label }) => (
+              <div class="flex flex-col gap-0.5">
+                <span class="font-mono font-bold text-accent text-xl sm:text-2xl leading-none">
+                  {value}
                 </span>
-              ))
-            }
+                <span class="text-muted text-xs leading-snug">{label}</span>
+              </div>
+            ))}
           </div>
 
           <!-- CV button -->
@@ -66,7 +94,6 @@ const stack = [
               rel="noopener noreferrer"
               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-all duration-200 hover:-translate-y-0.5"
             >
-              <!-- PDF icon -->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
