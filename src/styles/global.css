@@ -204,6 +204,46 @@ a.is-active {
   .palette-panel    { animation: palette-panel-in    0.15s cubic-bezier(0.16, 1, 0.3, 1) both; }
 }
 
+/* ── Toast notifications ─────────────────────────────────── */
+#toast-region {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1rem;
+  z-index: 9900;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.5rem;
+  pointer-events: none;
+  width: min(22rem, calc(100vw - 2rem));
+}
+
+.toast-item {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  box-shadow: var(--hover-shadow);
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease,
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-item.toast-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ── Skip navigation link ──────────────────────────────────── */
 .skip-link {
   position: absolute;

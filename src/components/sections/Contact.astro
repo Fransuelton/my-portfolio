@@ -104,21 +104,13 @@ const socialLinks = [
 
 <script>
   const btn = document.getElementById("copy-email-btn") as HTMLButtonElement | null;
-  const display = document.getElementById("email-display");
 
   btn?.addEventListener("click", async () => {
     const email = btn.dataset.email ?? "";
     const copiedLabel = btn.dataset.copiedLabel ?? "Copied!";
-    const copyLabel = btn.dataset.copyLabel ?? "";
-
     try {
       await navigator.clipboard.writeText(email);
-      if (display) display.textContent = copiedLabel;
-      btn.setAttribute("aria-label", copiedLabel);
-      setTimeout(() => {
-        if (display) display.textContent = email;
-        btn.setAttribute("aria-label", copyLabel);
-      }, 2000);
+      window.toast?.(copiedLabel, "success");
     } catch (_) {}
   });
 </script>

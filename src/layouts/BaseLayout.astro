@@ -141,6 +141,9 @@ const {
     <CommandPalette client:load />
 
     <script>
+      import { initToast } from "../lib/toast";
+      initToast();
+
       // Scroll progress bar
       const bar = document.getElementById("scroll-progress");
       if (bar) {
