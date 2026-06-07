@@ -82,7 +82,7 @@ const navLinks = [
       <button
         id="menu-btn"
         class="md:hidden p-2 rounded-lg border border-border text-muted hover:text-accent hover:border-accent transition-colors"
-        aria-label="Abrir menu"
+        aria-label={lang === "en" ? "Open menu" : lang === "es" ? "Abrir menú" : "Abrir menu"}
         aria-expanded="false"
         aria-controls="mobile-menu"
       >

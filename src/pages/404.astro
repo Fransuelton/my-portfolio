@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="404 — Página não encontrada · Fransuelton Francisco"
+  description="A página que você buscou não existe ou foi movida para outra rota."
+  lang="pt"
+  canonicalUrl="https://fransuelton.dev/404"
+>
+  <main id="main-content" tabindex="-1" class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Dot grid (same as Hero) -->
+    <div class="hero-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+    <div class="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 py-28">
+      <div class="max-w-lg">
+        <!-- Terminal prompt -->
+        <p
+          class="hero-item font-mono text-muted text-sm mb-8 flex items-center gap-2"
+          style="--delay: 100ms"
+          aria-hidden="true"
+        >
+          <span class="text-accent text-base">›</span>
+          <span>~</span>
+          <span class="text-muted/50">/fransuelton.dev</span>
+        </p>
+
+        <!-- 404 digits — each char scrambles independently -->
+        <h1
+          class="hero-item font-mono font-bold leading-none tracking-tighter text-[9rem] sm:text-[12rem] mb-6 select-none"
+          style="--delay: 180ms"
+          aria-label="Erro 404"
+        >
+          <span class="text-text" data-scramble>4</span><span class="text-accent" data-scramble>0</span><span class="text-text" data-scramble>4</span>
+        </h1>
+
+        <!-- Copy -->
+        <p class="hero-item font-mono text-xl sm:text-2xl text-muted mb-3" style="--delay: 320ms">
+          Página não encontrada.
+        </p>
+        <p class="hero-item text-sm text-muted/70 leading-relaxed mb-10 border-l-2 border-accent/30 pl-4" style="--delay: 400ms">
+          O caminho que você buscou não existe<br />ou foi movido para outra rota.
+        </p>
+
+        <!-- CTA -->
+        <div class="hero-item flex flex-wrap gap-4" style="--delay: 490ms">
+          <a
+            href="/"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-all duration-200 hover:-translate-y-0.5"
+          >
+            <span aria-hidden="true">←</span>
+            Voltar ao início
+          </a>
+          <a
+            href="/#contact"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-mono text-sm font-medium border border-border text-text hover:border-accent hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
+          >
+            Falar comigo
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .hero-bg {
+    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: linear-gradient(180deg, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+</style>
+
+<!-- Scramble the 404 digits -->
+<script>
+  (function () {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$!";
+    const FRAME_MS = 50;
+    const INITIAL_FRAMES = 7;
+    const LOCK_EVERY = 3;
+
+    function scramble(el: HTMLElement) {
+      const target = el.textContent ?? "";
+      const len = target.length;
+      let frame = 0;
+
+      const tick = () => {
+        const locked =
+          frame <= INITIAL_FRAMES
+            ? 0
+            : Math.min(len, Math.floor((frame - INITIAL_FRAMES) / LOCK_EVERY));
+
+        let out = "";
+        for (let i = 0; i < len; i++) {
+          out +=
+            i < locked
+              ? target[i]
+              : CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+        el.textContent = out;
+
+        if (locked < len) { frame++; setTimeout(tick, FRAME_MS); }
+        else el.textContent = target;
+      };
+
+      tick();
+    }
+
+    const spans = Array.from(document.querySelectorAll<HTMLElement>("[data-scramble]"));
+    spans.forEach((el, i) => {
+      setTimeout(() => scramble(el), 200 + i * 80);
+    });
+  })();
+</script>

@@ -30,6 +30,7 @@ export default function CommandPalette() {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<Element | null>(null);
   const isOpenRef = useRef(false);
   isOpenRef.current = isOpen;
 
@@ -76,6 +77,7 @@ export default function CommandPalette() {
   // Focus + scroll lock
   useEffect(() => {
     if (isOpen) {
+      triggerRef.current = document.activeElement;
       document.body.style.overflow = "hidden";
       setTimeout(() => inputRef.current?.focus(), 30);
     } else {
@@ -83,6 +85,7 @@ export default function CommandPalette() {
       setQuery("");
       setEasterEgg(false);
       setSelectedIndex(0);
+      setTimeout(() => (triggerRef.current as HTMLElement)?.focus?.(), 0);
     }
   }, [isOpen]);
 
