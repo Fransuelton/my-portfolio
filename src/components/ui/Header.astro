@@ -1,6 +1,8 @@
 ---
 import { useTranslations, getLocalePath } from "../../i18n/utils";
 import type { Lang } from "../../i18n/utils";
+import ThemeToggle from "../islands/ThemeToggle";
+import LanguageSelector from "../islands/LanguageSelector";
 
 const lang = (Astro.currentLocale as Lang) ?? "pt";
 const t = useTranslations(lang);
@@ -49,15 +51,15 @@ const navLinks = [
       }
     </nav>
 
-    <!-- Right: CTA + placeholders + mobile toggle -->
+    <!-- Right: theme toggle + language selector + CTA + mobile toggle -->
     <div class="flex items-center gap-2">
-      <!-- Phase 3: ThemeToggle island goes here -->
-      <!-- Phase 3: LanguageSelector island goes here -->
+      <ThemeToggle client:load />
+      <LanguageSelector client:load />
 
-      <!-- CTA — Phase 3: swap href for modal trigger -->
+      <!-- CTA — falls back to WhatsApp if JS is not available -->
       <a
         href={WHATSAPP_URL}
-        id="briefing-cta"
+        data-briefing-trigger
         target="_blank"
         rel="noopener noreferrer"
         class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg font-mono text-xs font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-colors"
@@ -127,6 +129,7 @@ const navLinks = [
     <div class="mt-2 pt-2 border-t border-border">
       <a
         href={WHATSAPP_URL}
+        data-briefing-trigger
         target="_blank"
         rel="noopener noreferrer"
         class="flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-colors"

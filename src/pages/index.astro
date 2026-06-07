@@ -1,7 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/ui/Header.astro";
-import Footer from "../components/ui/Footer.astro";
 import Hero from "../components/sections/Hero.astro";
 import About from "../components/sections/About.astro";
 import Services from "../components/sections/Services.astro";
@@ -27,7 +25,6 @@ const alternates = getAlternateUrls(site, {
   canonicalUrl={`${site}/`}
   alternates={alternates}
 >
-  <Header />
   <main>
     <Hero />
     <About />
@@ -35,5 +32,4 @@ const alternates = getAlternateUrls(site, {
     <Projects />
     <Contact />
   </main>
-  <Footer />
 </BaseLayout>
