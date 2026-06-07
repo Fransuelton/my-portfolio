@@ -87,6 +87,36 @@ const {
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/logo.svg" type="image/svg+xml" />
 
+    <!-- Structured data (Person + WebSite) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify([
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Fransuelton Francisco",
+          url: "https://fransuelton.dev",
+          jobTitle:
+            lang === "en"
+              ? "Fullstack Developer"
+              : lang === "es"
+                ? "Desarrollador Fullstack"
+                : "Desenvolvedor Fullstack",
+          image: "https://avatars.githubusercontent.com/u/107893416?v=4",
+          sameAs: [
+            "https://github.com/Fransuelton",
+            "https://linkedin.com/in/fransuelton",
+          ],
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Fransuelton Francisco",
+          url: "https://fransuelton.dev",
+        },
+      ])}
+    />
+
     <!-- Per-page head extras (JSON-LD, extra meta, etc.) -->
     <slot name="head" />
   </head>
@@ -95,6 +125,10 @@ const {
     data-lang={lang}
     data-alternates={JSON.stringify(alternates)}
   >
+    <!-- Skip navigation: first focusable element on every page -->
+    <a href="#main-content" class="skip-link">
+      {lang === "en" ? "Skip to main content" : lang === "es" ? "Ir al contenido principal" : "Ir ao conteúdo principal"}
+    </a>
     <Header />
     <slot />
     <Footer />
