@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/ui/Header.astro";
+import Footer from "../components/ui/Footer.astro";
+import { useTranslations, getAlternateUrls } from "../i18n/utils";
+
+const lang = "pt";
+const t = useTranslations(lang);
+const site = "https://fransuelton.dev";
+
+const alternates = getAlternateUrls(site, {
+  pt: "/projetos/",
+  en: "/en/projects/",
+  es: "/es/proyectos/",
+});
+---
+
+<BaseLayout
+  title={t("seo.projects.title")}
+  description={t("seo.projects.description")}
+  lang={lang}
+  canonicalUrl={`${site}/projetos/`}
+  alternates={alternates}
+>
+  <Header />
+  <main class="min-h-screen py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="mb-12">
+        <p class="font-mono text-xs text-muted uppercase tracking-widest mb-3" aria-hidden="true">
+          <span class="text-accent">$</span> ls ~/projetos
+        </p>
+        <h1 class="font-mono font-bold text-text text-3xl md:text-4xl mb-2">
+          Projetos
+        </h1>
+        <p class="text-muted">Fase 5 — em breve, integração com GitHub API.</p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
