@@ -38,7 +38,7 @@ const services: Array<{
 <section id="services" class="py-20 md:py-28">
   <div class="w-full max-w-5xl mx-auto px-4 sm:px-6">
     <!-- Heading -->
-    <div class="mb-12">
+    <div class="mb-12 reveal">
       <p class="font-mono text-xs text-muted uppercase tracking-widest mb-3" aria-hidden="true">
         <span class="text-accent">$</span> {t("nav.services").toLowerCase()}
       </p>
@@ -49,10 +49,10 @@ const services: Array<{
     </div>
 
     <!-- Cards -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal" style="--i: 1">
       {
         services.map(({ icon, titleKey, descKey, serviceIndex }) => (
-          <div class="group bg-card border border-border rounded-2xl p-6 flex flex-col gap-4 hover:border-accent transition-colors duration-300">
+          <div class="group bg-card border border-border rounded-2xl p-6 flex flex-col gap-4 hover:border-accent transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-[var(--card-shadow)] hover:shadow-[var(--hover-shadow)]">
             <!-- Icon -->
             <div
               class="w-11 h-11 rounded-xl flex items-center justify-center text-accent shrink-0"

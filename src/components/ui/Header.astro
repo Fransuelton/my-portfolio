@@ -56,6 +56,17 @@ const navLinks = [
       <ThemeToggle client:load />
       <LanguageSelector client:load />
 
+      <!-- ⌘K command palette trigger -->
+      <button
+        id="cmd-palette-btn"
+        class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-border font-mono text-xs text-muted hover:text-accent hover:border-accent transition-colors"
+        aria-label={t("cmd.open")}
+        aria-keyshortcuts="Meta+k Control+k"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <kbd class="font-mono text-[10px] opacity-60">⌘K</kbd>
+      </button>
+
       <!-- CTA — falls back to WhatsApp if JS is not available -->
       <a
         href={WHATSAPP_URL}
@@ -141,6 +152,10 @@ const navLinks = [
 </header>
 
 <script>
+  document.getElementById("cmd-palette-btn")?.addEventListener("click", () => {
+    document.dispatchEvent(new CustomEvent("open-command-palette"));
+  });
+
   const btn = document.getElementById("menu-btn") as HTMLButtonElement | null;
   const menu = document.getElementById("mobile-menu");
   const iconOpen = document.getElementById("icon-open");
