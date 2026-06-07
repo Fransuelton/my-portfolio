@@ -1,0 +1,176 @@
+---
+import { useTranslations } from "../../i18n/utils";
+import type { Lang } from "../../i18n/utils";
+
+const lang = (Astro.currentLocale as Lang) ?? "pt";
+const t = useTranslations(lang);
+
+const CV_URL =
+  "https://drive.google.com/file/d/1y-HLnC2XmD5PPHmWULrOWNi-zAJfXmXZ/view?usp=sharing";
+const AVATAR_URL = "https://avatars.githubusercontent.com/u/107893416?v=4";
+
+const stack = [
+  "Shopify", "Liquid", "React", "Node.js",
+  "MySQL", "TypeScript", "Vue.js",
+  "JavaScript", "MongoDB", "Git",
+];
+const VISIBLE = 7;
+const overflow = stack.length - VISIBLE;
+
+const stats = [
+  { value: "+3",   label: t("about.stat.years") },
+  { value: "+90",  label: t("about.stat.projects") },
+  { value: "+5",   label: t("about.stat.clients") },
+  { value: "100%", label: t("about.stat.focus") },
+];
+---
+
+<section id="about" class="py-20 md:py-28">
+  <div class="w-full max-w-5xl mx-auto px-4 sm:px-6">
+    <div class="bg-surface border border-border rounded-2xl p-8 md:p-12 reveal">
+      <div class="flex flex-col md:flex-row gap-10 items-center md:items-start">
+        <!-- Photo -->
+        <div class="shrink-0">
+          <img
+            src={AVATAR_URL}
+            alt={t("about.photo.alt")}
+            width="192"
+            height="192"
+            loading="lazy"
+            decoding="async"
+            class="rounded-2xl w-40 h-40 md:w-48 md:h-48 object-cover border-2 border-border"
+          />
+        </div>
+
+        <!-- Info -->
+        <div class="flex flex-col gap-6 flex-1">
+          <!-- Section label -->
+          <p class="font-mono text-xs text-muted uppercase tracking-widest" aria-hidden="true">
+            <span class="text-accent">$</span> {t("nav.about").toLowerCase()}
+          </p>
+
+          <h2 class="font-mono font-bold text-text text-2xl md:text-3xl leading-snug -mt-2">
+            {t("about.title")}
+          </h2>
+
+          <p class="text-muted leading-relaxed text-sm sm:text-base">
+            {t("about.description")}
+          </p>
+
+          <!-- Stack badges -->
+          <div class="flex flex-wrap gap-2" aria-label="Tech stack">
+            {stack.slice(0, VISIBLE).map((item) => (
+              <span class="font-mono text-xs px-2.5 py-1 rounded-lg bg-card border border-border text-muted hover:border-accent hover:text-accent transition-colors cursor-default">
+                {item}
+              </span>
+            ))}
+            {overflow > 0 && (
+              <span
+                class="font-mono text-xs px-2.5 py-1 rounded-lg bg-card border border-border text-accent cursor-default"
+                title={stack.slice(VISIBLE).join(", ")}
+              >
+                +{overflow}
+              </span>
+            )}
+          </div>
+
+          <!-- Stats grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 border-t border-border">
+            {stats.map(({ value, label }) => (
+              <div class="flex flex-col gap-0.5">
+                <span
+                  class="font-mono font-bold text-text text-2xl sm:text-3xl leading-none"
+                  data-countup={value}
+                >
+                  {value}
+                </span>
+                <span class="text-muted text-xs leading-snug">{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- GitHub live stats (populated by JS) -->
+          <div id="gh-stats" aria-live="polite" class="flex items-center gap-2 font-mono text-xs text-muted/60 min-h-[1rem]"></div>
+
+          <!-- CV button -->
+          <div>
+            <a
+              href={CV_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-all duration-200 hover:-translate-y-0.5"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              {t("about.cv")}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (async () => {
+    const CACHE_KEY = "gh_stats_fransuelton_v1";
+    const TTL = 12 * 60 * 60 * 1000;
+
+    let stats: { repos: number; followers: number } | null = null;
+
+    try {
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) ?? "null");
+      if (cached && Date.now() - cached.ts < TTL) {
+        stats = cached.data;
+      } else {
+        const res = await fetch("https://api.github.com/users/Fransuelton");
+        if (res.ok) {
+          const d = await res.json();
+          stats = { repos: d.public_repos as number, followers: d.followers as number };
+          localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: stats }));
+        }
+      }
+    } catch (_) {}
+
+    if (!stats) return;
+
+    const el = document.getElementById("gh-stats");
+    if (!el) return;
+
+    const lang = document.body.dataset.lang ?? "pt";
+    const followLabel = lang === "en" ? "followers" : "seguidores";
+
+    const ghIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>`;
+    const userIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
+
+    const reposEl = document.createElement("span");
+    reposEl.className = "flex items-center gap-1";
+    reposEl.innerHTML = `${ghIcon}${stats.repos} repos`;
+
+    const sep = document.createElement("span");
+    sep.setAttribute("aria-hidden", "true");
+    sep.textContent = "·";
+
+    const followEl = document.createElement("span");
+    followEl.className = "flex items-center gap-1";
+    followEl.innerHTML = `${userIcon}${stats.followers} ${followLabel}`;
+
+    el.appendChild(reposEl);
+    el.appendChild(sep);
+    el.appendChild(followEl);
+  })();
+</script>

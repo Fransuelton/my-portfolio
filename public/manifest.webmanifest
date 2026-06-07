@@ -1,0 +1,20 @@
+{
+  "name": "Fransuelton Francisco",
+  "short_name": "Fransuelton",
+  "description": "Desenvolvedor Fullstack · Especialista Shopify",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
