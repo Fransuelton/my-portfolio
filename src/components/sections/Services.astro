@@ -12,21 +12,25 @@ const services: Array<{
   titleKey: TranslationKey;
   descKey: TranslationKey;
   icon: string;
+  serviceIndex: number;
 }> = [
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
     titleKey: "services.web.title",
     descKey:  "services.web.desc",
+    serviceIndex: 0,
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`,
     titleKey: "services.api.title",
     descKey:  "services.api.desc",
+    serviceIndex: 1,
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
     titleKey: "services.maint.title",
     descKey:  "services.maint.desc",
+    serviceIndex: 2,
   },
 ];
 ---
@@ -47,7 +51,7 @@ const services: Array<{
     <!-- Cards -->
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {
-        services.map(({ icon, titleKey, descKey }) => (
+        services.map(({ icon, titleKey, descKey, serviceIndex }) => (
           <div class="group bg-card border border-border rounded-2xl p-6 flex flex-col gap-4 hover:border-accent transition-colors duration-300">
             <!-- Icon -->
             <div
@@ -64,9 +68,10 @@ const services: Array<{
               {t(descKey)}
             </p>
 
-            <!-- CTA — Phase 3: swap for modal with pre-filled service type -->
             <a
               href={WHATSAPP_URL}
+              data-briefing-trigger
+              data-service-index={String(serviceIndex)}
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center gap-1.5 font-mono text-sm text-accent hover:text-accent-dim transition-colors group-hover:translate-x-0.5 duration-200"
