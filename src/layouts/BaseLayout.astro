@@ -36,6 +36,11 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://avatars.githubusercontent.com" />
+    <link rel="dns-prefetch" href="https://api.github.com" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#080808" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
 
     <!--
       Anti-FOUC: runs synchronously before the first paint.
@@ -155,6 +160,15 @@ const {
         document.addEventListener("scroll", updateBar, { passive: true });
       }
 
+      // Spotlight cursor on cards
+      document.addEventListener("mousemove", (e) => {
+        const card = (e.target as Element).closest<HTMLElement>(".card-spotlight");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+      }, { passive: true });
+
       // Easter egg
       console.log(
         "%c Fransuelton Francisco %c",
@@ -209,6 +223,39 @@ const {
           { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
         );
         reveals.forEach((el) => observer.observe(el));
+      }
+
+      // Count-up animations
+      const countupEls = document.querySelectorAll<HTMLElement>("[data-countup]");
+      if (countupEls.length > 0 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const animateCount = (el: HTMLElement) => {
+          const raw = el.dataset.countup ?? "";
+          const m = raw.match(/^([+]?)(\d+)(%?)$/);
+          if (!m) return;
+          const [, prefix, numStr, suffix] = m;
+          const end = parseInt(numStr, 10);
+          const dur = 1200;
+          const started = performance.now();
+          const tick = (now: number) => {
+            const p = Math.min(1, (now - started) / dur);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = `${prefix}${Math.round(eased * end)}${suffix}`;
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        };
+        const countObs = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                animateCount(entry.target as HTMLElement);
+                countObs.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.5 }
+        );
+        countupEls.forEach((el) => countObs.observe(el));
       }
     </script>
   </body>
