@@ -3,8 +3,11 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: "https://fransuelton.dev",
+
   integrations: [
     react(),
     sitemap({
@@ -18,9 +21,11 @@ export default defineConfig({
       },
     }),
   ],
+
   vite: {
     plugins: [tailwindcss()],
   },
+
   i18n: {
     defaultLocale: "pt",
     locales: ["pt", "en", "es"],
@@ -28,4 +33,6 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+
+  adapter: cloudflare()
 });
