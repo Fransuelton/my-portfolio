@@ -14,13 +14,21 @@ export default function ThemeToggle() {
   }, []);
 
   const apply = (next: Theme) => {
-    if (next === "system") {
-      localStorage.removeItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+    const doApply = () => {
+      if (next === "system") {
+        localStorage.removeItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      } else {
+        localStorage.setItem("theme", next);
+        document.documentElement.setAttribute("data-theme", next);
+      }
+    };
+    if ("startViewTransition" in document) {
+      (document as Document & { startViewTransition: (cb: () => void) => void })
+        .startViewTransition(doApply);
     } else {
-      localStorage.setItem("theme", next);
-      document.documentElement.setAttribute("data-theme", next);
+      doApply();
     }
     setTheme(next);
   };
