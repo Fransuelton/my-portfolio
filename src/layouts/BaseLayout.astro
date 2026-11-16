@@ -51,7 +51,7 @@ const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN as string | undefined;
     <link rel="dns-prefetch" href="https://api.github.com" />
     {cfToken && <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />}
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#080808" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0e0f11" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
 
     <!--
@@ -106,8 +106,9 @@ const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN as string | undefined;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Structured data (Person + WebSite) -->
     <script
@@ -201,11 +202,11 @@ const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN as string | undefined;
       // Easter egg
       console.log(
         "%c Fransuelton Francisco %c",
-        "background:#00ff88;color:#080808;font-weight:700;padding:3px 8px;border-radius:4px;",
+        "background:#0e0f11;color:#f4f4f2;font-weight:700;padding:3px 8px;border-radius:4px;border-right:6px solid #5fa7ff;",
         ""
       );
-      console.log("%cFullstack Developer · Shopify · Node.js", "color:#71717a;");
-      console.log("%cgithub.com/Fransuelton", "color:#00ff88;");
+      console.log("%cFullstack Developer · Shopify · Node.js", "color:#8a8b8e;");
+      console.log("%c› fransuelton.dev", "color:#5fa7ff;font-family:monospace;");
 
       // Scrollspy
       const siteHeader = document.getElementById("site-header");

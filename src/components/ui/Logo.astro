@@ -1,0 +1,39 @@
+---
+/**
+ * Brand symbol (F + prompt + cursor) from the brand kit v1.0, inlined so it
+ * follows the theme: strokes use currentColor, the cursor uses --accent
+ * (Azul cursor #156CDD on light, Azul noite #5FA7FF on dark).
+ * Geometry is the "simbolo-para-fundo-*" master on a 100-unit grid.
+ */
+export interface Props {
+  size?: number;
+  /** Show the "fransuelton.dev" wordmark next to the symbol. */
+  wordmark?: boolean;
+  class?: string;
+}
+
+const { size = 36, wordmark = false, class: className = "" } = Astro.props;
+---
+
+<span class:list={["inline-flex items-center gap-2.5 text-text", className]}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 100 100"
+    width={size}
+    height={size}
+    aria-hidden="true"
+    class="shrink-0"
+  >
+    <rect x="8" y="8" width="84" height="84" rx="18" fill="none" stroke="currentColor" stroke-width="5" />
+    <path d="M28 26h42v9H37v41h-9z" fill="currentColor" />
+    <polyline points="46,43 58,52 46,61" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="square" />
+    <rect x="61" y="68" width="13" height="8" fill="var(--accent)" />
+  </svg>
+  {
+    wordmark && (
+      <span class="font-mono font-semibold text-[15px] tracking-[-0.02em] leading-none">
+        fransuelton<span class="text-muted">.dev</span>
+      </span>
+    )
+  }
+</span>

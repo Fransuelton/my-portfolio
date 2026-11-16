@@ -3,6 +3,7 @@ import { useTranslations, getLocalePath } from "../../i18n/utils";
 import type { Lang } from "../../i18n/utils";
 import ThemeToggle from "../islands/ThemeToggle";
 import LanguageSelector from "../islands/LanguageSelector";
+import Logo from "./Logo.astro";
 
 const lang = (Astro.currentLocale as Lang) ?? "pt";
 const t = useTranslations(lang);
@@ -26,15 +27,12 @@ const navLinks = [
     <a
       href={getLocalePath(lang)}
       aria-label="Fransuelton Francisco — Home"
-      class="shrink-0"
+      class="shrink-0 transition-opacity hover:opacity-70"
     >
-      <img
-        src="/logo.svg"
-        alt="Logo"
-        width="44"
-        height="44"
-        class="transition-opacity hover:opacity-70"
-      />
+      <!-- Horizontal logo (symbol + wordmark) on wide screens; symbol alone
+           where the nav would otherwise get cramped (md) or on phones. -->
+      <Logo size={34} wordmark class="hidden lg:inline-flex" />
+      <Logo size={34} class="lg:hidden" />
     </a>
 
     <!-- Desktop nav -->
@@ -78,7 +76,7 @@ const navLinks = [
         data-briefing-trigger
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg font-mono text-xs font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-colors"
+        class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg font-mono text-xs font-semibold bg-accent text-on-accent hover:bg-accent-dim transition-colors"
       >
         {t("nav.quote")}
       </a>
@@ -148,7 +146,7 @@ const navLinks = [
         data-briefing-trigger
         target="_blank"
         rel="noopener noreferrer"
-        class="flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-colors"
+        class="flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-on-accent hover:bg-accent-dim transition-colors"
       >
         {t("nav.quote")}
       </a>
