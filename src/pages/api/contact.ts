@@ -60,19 +60,19 @@ function notificationHtml(name: string, email: string, message: string) {
   return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head><meta charset="UTF-8"><style>
-  body{font-family:system-ui,sans-serif;background:#0a0a0a;color:#e4e4e7;margin:0;padding:32px}
-  .card{background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:32px;max-width:560px;margin:auto}
-  .label{font-size:11px;color:#71717a;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
-  .value{font-size:15px;color:#e4e4e7;margin:0 0 20px}
-  .msg{background:#111;border-left:3px solid #00ff88;padding:16px;border-radius:0 8px 8px 0;white-space:pre-wrap;font-size:15px;line-height:1.7}
-  .accent{color:#00ff88}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:#0e0f11;color:#f4f4f2;margin:0;padding:32px}
+  .card{background:#18191c;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:32px;max-width:560px;margin:auto}
+  .label{font-size:11px;color:#8a8b8e;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+  .value{font-size:15px;color:#f4f4f2;margin:0 0 20px}
+  .msg{background:#18191c;border-left:3px solid #5fa7ff;padding:16px;border-radius:0 8px 8px 0;white-space:pre-wrap;font-size:15px;line-height:1.7}
+  .accent{color:#5fa7ff}
 </style></head>
 <body><div class="card">
-  <h2><span class="accent">$</span> nova mensagem do portfólio</h2>
+  <h2><span class="accent">›</span> nova mensagem do portfólio</h2>
   <div class="label">Nome</div>
   <p class="value">${esc(name)}</p>
   <div class="label">E-mail</div>
-  <p class="value"><a href="mailto:${esc(email)}" style="color:#00ff88">${esc(email)}</a></p>
+  <p class="value"><a href="mailto:${esc(email)}" style="color:#5fa7ff">${esc(email)}</a></p>
   <div class="label">Mensagem</div>
   <div class="msg">${esc(message)}</div>
 </div></body></html>`;
@@ -84,19 +84,19 @@ function confirmationHtml(name: string, lang: Lang) {
   return `<!DOCTYPE html>
 <html lang="${htmlLang}">
 <head><meta charset="UTF-8"><style>
-  body{font-family:system-ui,sans-serif;background:#0a0a0a;color:#e4e4e7;margin:0;padding:32px}
-  .card{background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:32px;max-width:560px;margin:auto}
-  .accent{color:#00ff88}
-  p{line-height:1.7;color:#a1a1aa}
-  .footer{margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.07);font-size:13px;color:#52525b}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:#0e0f11;color:#f4f4f2;margin:0;padding:32px}
+  .card{background:#18191c;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:32px;max-width:560px;margin:auto}
+  .accent{color:#5fa7ff}
+  p{line-height:1.7;color:#b4b5b8}
+  .footer{margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.07);font-size:13px;color:#8a8b8e}
 </style></head>
 <body><div class="card">
   <h2>${esc(t("email.confirm.hi"))}, ${esc(name)}! <span class="accent">✓</span></h2>
   <p>${esc(t("email.confirm.body"))}</p>
   <p>${esc(t("email.confirm.socials"))}</p>
   <p>
-    <a href="https://github.com/Fransuelton" style="color:#00ff88;margin-right:16px">GitHub</a>
-    <a href="https://linkedin.com/in/fransuelton" style="color:#00ff88">LinkedIn</a>
+    <a href="https://github.com/Fransuelton" style="color:#5fa7ff;margin-right:16px">GitHub</a>
+    <a href="https://linkedin.com/in/fransuelton" style="color:#5fa7ff">LinkedIn</a>
   </p>
   <div class="footer">Fransuelton Francisco — fransuelton.dev</div>
 </div></body></html>`;

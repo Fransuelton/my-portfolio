@@ -42,25 +42,21 @@ export const { getStaticPaths, GET } = await OGImageRoute({
     return {
       title: t(page.titleKey),
       description: t(page.descKey),
-      logo: { path: "./src/assets/avatar.webp", size: [128] },
-      // Matches --bg / --card from global.css
-      bgGradient: [
-        [8, 8, 8],
-        [20, 20, 20],
-      ],
-      // Accent stripe, same #00ff88 as the site
-      border: { color: [0, 255, 136], width: 16, side: "inline-start" },
-      padding: 64,
+      // Mirrors aplicacoes/og-compartilhamento from the brand kit:
+      // symbol top-left on solid Tinta (#0E0F11), no accent stripe.
+      logo: { path: "./src/assets/brand/symbol-dark.png", size: [112] },
+      bgGradient: [[14, 15, 17]],
+      padding: 80,
       font: {
         title: {
-          color: [228, 228, 231],
+          color: [244, 244, 242],
           size: 56,
           weight: "Bold",
           lineHeight: 1.2,
           families: [MONO],
         },
         description: {
-          color: [113, 113, 122],
+          color: [138, 139, 142],
           size: 28,
           lineHeight: 1.5,
           families: [MONO],
