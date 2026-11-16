@@ -17,7 +17,9 @@ const LANGS: Lang[] = ["pt", "en", "es"];
  */
 const pages: Record<string, OGPage> = {};
 for (const lang of LANGS) {
-  pages[`${lang}-home`] = {
+  // pt-home is the brand kit's hand-made card, served from public/og/pt-home.png.
+  // Generating it here too would collide with that static file.
+  if (lang !== "pt") pages[`${lang}-home`] = {
     lang,
     titleKey: "seo.title",
     descKey: "seo.description",
