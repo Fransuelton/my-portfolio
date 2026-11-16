@@ -15,21 +15,22 @@ const roles = t("hero.roles").split(",");
 
   <div class="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 py-28">
     <div class="max-w-2xl">
-      <!-- Terminal prompt -->
+      <!-- Brand prompt — same line as the OG card and LinkedIn banner -->
       <p
-        class="hero-item font-mono text-muted text-sm mb-8 flex items-center gap-2"
+        class="hero-item font-mono text-accent text-sm mb-8"
         style="--delay: 100ms"
         aria-hidden="true"
       >
-        <span class="text-accent text-base">›</span>
-        <span>~</span>
-        <span class="text-muted/50">/fransuelton.dev</span>
+        › fransuelton.dev
       </p>
 
       <!-- Name -->
-      <h1 class="hero-item font-mono font-bold leading-[0.95] tracking-tight mb-4" style="--delay: 200ms">
-        <span class="text-text text-5xl sm:text-6xl md:text-7xl block" data-scramble>Fransuelton</span>
-        <span class="text-accent text-5xl sm:text-6xl md:text-7xl block" data-scramble>Francisco</span>
+      <h1
+        class="hero-item font-bold text-text leading-[0.95] text-5xl sm:text-6xl md:text-7xl mb-5"
+        style="--delay: 200ms"
+      >
+        <span class="block">Fransuelton</span>
+        <span class="block">Francisco</span>
       </h1>
 
       <!-- Role — typewriter loop (JS-driven) -->
@@ -45,7 +46,7 @@ const roles = t("hero.roles").split(",");
 
       <!-- Tagline -->
       <p
-        class="hero-item text-muted text-base sm:text-lg leading-relaxed mb-10 max-w-lg border-l-2 border-accent/40 pl-4"
+        class="hero-item text-muted text-base sm:text-lg leading-relaxed mb-10 max-w-lg"
         style="--delay: 460ms"
       >
         {t("hero.tagline")}
@@ -58,7 +59,7 @@ const roles = t("hero.roles").split(",");
           data-briefing-trigger
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-all duration-200 hover:-translate-y-0.5"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-on-accent hover:bg-accent-dim transition-all duration-200 hover:-translate-y-0.5"
         >
           {t("hero.cta.primary")}
         </a>
@@ -82,16 +83,16 @@ const roles = t("hero.roles").split(",");
     -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 15%, black 85%, transparent 100%);
   }
 
-  /* Block cursor */
+  /* Brand cursor — the flat block from the symbol, not a text caret */
   .tw-loop::after {
     content: "";
     display: inline-block;
-    width: 2px;
-    height: 0.88em;
+    width: 0.62em;
+    height: 0.36em;
     background: var(--accent);
-    margin-left: 3px;
-    vertical-align: -0.06em;
-    animation: tw-blink 0.75s step-end infinite;
+    margin-left: 0.15em;
+    vertical-align: baseline;
+    animation: tw-blink 1.1s step-end infinite;
   }
 
   @keyframes tw-blink {
@@ -135,48 +136,5 @@ const roles = t("hero.roles").split(",");
       }
     }
     setTimeout(tick, PAUSE_FULL);
-  })();
-</script>
-
-<!-- Name scramble -->
-<script>
-  (function () {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$!";
-    const FRAME_MS = 40;
-    const INITIAL_FRAMES = 3;
-    const LOCK_EVERY = 2;
-
-    function scramble(el: HTMLElement) {
-      const target = el.textContent ?? "";
-      const len = target.length;
-      let frame = 0;
-
-      const tick = () => {
-        const locked = frame <= INITIAL_FRAMES
-          ? 0
-          : Math.min(len, Math.floor((frame - INITIAL_FRAMES) / LOCK_EVERY));
-
-        let out = "";
-        for (let i = 0; i < len; i++) {
-          if (target[i] === " ") { out += " "; continue; }
-          out += i < locked
-            ? target[i]
-            : CHARS[Math.floor(Math.random() * CHARS.length)];
-        }
-        el.textContent = out;
-
-        if (locked < len) { frame++; setTimeout(tick, FRAME_MS); }
-        else { el.textContent = target; }
-      };
-
-      tick();
-    }
-
-    // Align with H1 animation-delay (200ms)
-    setTimeout(() => {
-      document.querySelectorAll<HTMLElement>("[data-scramble]").forEach(scramble);
-    }, 220);
   })();
 </script>

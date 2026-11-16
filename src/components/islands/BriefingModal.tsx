@@ -151,8 +151,8 @@ export default function BriefingModal() {
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <h2 id="briefing-title" className="font-mono font-bold text-text text-lg">
-            <span className="text-accent">$</span>{" "}{t("modal.title")}
+          <h2 id="briefing-title" className="font-bold text-text text-lg">
+            <span className="text-accent">›</span>{" "}{t("modal.title")}
           </h2>
           <button
             onClick={close}
@@ -257,7 +257,7 @@ export default function BriefingModal() {
           {/* Submit */}
           <button
             type="submit"
-            className="flex items-center justify-center gap-2.5 w-full px-6 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim transition-all duration-200 mt-1"
+            className="flex items-center justify-center gap-2.5 w-full px-6 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-on-accent hover:bg-accent-dim transition-all duration-200 mt-1"
           >
             {/* WhatsApp brand icon */}
             <svg

@@ -173,7 +173,7 @@ export default function ContactForm({ lang }: Props) {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-[#0a0a0a] hover:bg-accent-dim disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200"
+        className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-mono text-sm font-semibold bg-accent text-on-accent hover:bg-accent-dim disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200"
       >
         {status === "loading" ? (
           <>
